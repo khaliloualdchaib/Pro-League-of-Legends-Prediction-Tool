@@ -39,6 +39,6 @@ extractItemsFromCSV(csvFilePath, columnIndex, (err, items) => {
         console.error('Error reading CSV file:', err);
     } else {
         extractedteams = items; // Save the extracted teams to the variable
-        //console.log('Extracted items:', items);
+        console.log('Extracted items:', items);
     }
 });
