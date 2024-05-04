@@ -1,21 +1,17 @@
-from flask import Flask, jsonify
+from flask import Flask
+from flask_restful import Api
+from flask_cors import CORS
+import src
+#from src.teams import Teams
+#from src.utils import get_column_values_from_csv
+
 
 app = Flask(__name__)
 
-# Sample data
-sample_data = {
-    "message": "Hello, world!",
-    "numbers": [1, 2, 3, 4, 5],
-    "person": {
-        "name": "John Doe",
-        "age": 30,
-        "city": "New York"
-    }
-}
+api = Api(app)
+CORS(app)
 
-@app.route('/api/data', methods=['GET'])
-def get_data():
-    return jsonify(sample_data)
+api.add_resource(src.Teams, src.Teams.route())
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0")
