@@ -1,17 +1,4 @@
-import { extractItemsFromCSV } from "../data/data"; // Adjust the path as needed
-
 const ChampSelect = ({ team }) => {
-  const csvFilePath = "../data/teams.csv";
-  const columnIndex = 3; // Change this to the index of your column containing items
-
-  extractItemsFromCSV(csvFilePath, columnIndex, (err, items) => {
-    if (err) {
-      console.error("Error reading CSV file:", err);
-    } else {
-      console.log("Extracted items:", items);
-    }
-  });
-
   const championList = [
     "Aatrox",
     "Ahri",
