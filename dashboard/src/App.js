@@ -16,22 +16,22 @@ function App() {
             <img className="h-2/3 w-full rounded-lg" alt="map" src={map} />
           </figure>
 
-          <div class="absolute bottom-[45%] left-[50%] transform translate-x-[-50%]">
+          <div class="absolute bottom-[60%] left-[46%]">
             <PredictionData title={"First Blood"}></PredictionData>
           </div>
-          <div class="absolute bottom-[68.9%] left-[50%] transform -translate-x-[-50%]">
+          <div class="absolute bottom-[68.9%] left-[58.5%]">
             <PredictionData title={"First Tower"}></PredictionData>
           </div>
-          <div class="absolute bottom-[66%] left-[36%] transform -translate-x-[-50%]">
+          <div class="absolute bottom-[77%] left-[36%]">
             <PredictionData title={"First Baron"}></PredictionData>
           </div>
-          <div class="absolute bottom-[30%] left-[65%] transform -translate-x-[-50%]">
+          <div class="absolute bottom-[52%] left-[65%]">
             <PredictionData title={"First Dragon"}></PredictionData>
           </div>
-          <div class="absolute bottom-[71%] left-[73.5%] transform -translate-x-[-50%]">
+          <div class="absolute bottom-[80%] left-[73%]">
             <PredictionData title={"First Inhibitor"}></PredictionData>
           </div>
-          <div class="absolute bottom-[80%] left-[82.5%] transform -translate-x-[-50%]">
+          <div class="absolute bottom-[86%] left-[82%]">
             <PredictionData title={"Winner"}></PredictionData>
           </div>
         </div>
