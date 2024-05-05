@@ -11,14 +11,31 @@ function App() {
         <div className="basis-1/5">
           <ChampSelect team="blue" />
         </div>
-        <div class="basis-3/5 relative max-w-5xl mx-auto px-2 grid grid-cols-3 map-container">
-          <div class="relative overflow-hidden flex items-center justify-center flex-col">
-            <img src={map} alt="Map" className="map-image" />
-            <div class="absolute w-full h-full top-0 bottom-0 left-0 right-0 flex items-center justify-center">
-              <PredictionData title={"test"}></PredictionData>
-            </div>
+        <div class="basis-3/5 px-2 grid relative">
+          <figure class="max-w-full">
+            <img className="h-2/3 w-full rounded-lg" alt="map" src={map} />
+          </figure>
+
+          <div class="absolute bottom-[45%] left-[50%] transform translate-x-[-50%]">
+            <PredictionData title={"First Blood"}></PredictionData>
+          </div>
+          <div class="absolute bottom-[68.9%] left-[50%] transform -translate-x-[-50%]">
+            <PredictionData title={"First Tower"}></PredictionData>
+          </div>
+          <div class="absolute bottom-[66%] left-[36%] transform -translate-x-[-50%]">
+            <PredictionData title={"First Baron"}></PredictionData>
+          </div>
+          <div class="absolute bottom-[30%] left-[65%] transform -translate-x-[-50%]">
+            <PredictionData title={"First Dragon"}></PredictionData>
+          </div>
+          <div class="absolute bottom-[71%] left-[73.5%] transform -translate-x-[-50%]">
+            <PredictionData title={"First Inhibitor"}></PredictionData>
+          </div>
+          <div class="absolute bottom-[80%] left-[82.5%] transform -translate-x-[-50%]">
+            <PredictionData title={"Winner"}></PredictionData>
           </div>
         </div>
+
         <div className="basis-1/5">
           <ChampSelect team="red" />
         </div>
