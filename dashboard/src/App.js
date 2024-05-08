@@ -1,4 +1,7 @@
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+
 import ChampSelect from "./componenets/champSelect";
 import MainTabs from "./componenets/mainTabs";
 import FirstBlood from "./pages/firstBlood";
@@ -8,8 +11,7 @@ import FirstDragon from "./pages/firstDragon";
 import FirstInhibitor from "./pages/firstInhibitor";
 import MostKills from "./pages/mostKills";
 import WinPage from "./pages/win";
-import { Routes, Route } from "react-router-dom";
-import { BrowserRouter as Router } from "react-router-dom";
+import LeagueSelection from "./componenets/leagueSelection";
 
 function App() {
   return (
@@ -20,9 +22,13 @@ function App() {
           <div>
             <div class="flex flex-col">
               <div>
+                <LeagueSelection></LeagueSelection>
+              </div>
+
+              <div class="mt-2 max-w-sm p-5 rounded-lg shadow bg-gray-800 border-gray-700">
                 <ChampSelect team="blue" />
               </div>
-              <div className="pt-5">
+              <div className="mt-2 max-w-sm p-5 rounded-lg shadow bg-gray-800 border-gray-700">
                 <ChampSelect team="red" />
               </div>
             </div>

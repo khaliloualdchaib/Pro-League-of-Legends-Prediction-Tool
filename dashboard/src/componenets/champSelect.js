@@ -1,23 +1,36 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 const ChampSelect = ({ team }) => {
-  const championList = [
-    "Aatrox",
-    "Ahri",
-    "Akali",
-    "Akshan",
-    "Alistar",
-    "Amumu",
-    "Anivia",
-    "Annie",
-    "Aphelios",
-    "Ashe",
-    "Aurelion Sol",
-    "Azir",
-  ];
+  const patch = "14.9.1";
+  const url_champs =
+    "http://ddragon.leagueoflegends.com/cdn/" +
+    patch +
+    "/data/en_US/champion.json";
+  //const url_teams = "http://127.0.0.1:5000/api/teams"
+
+  //const [teams, setTeams] = useState([])
+  const [championList, setChampionList] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response1 = await axios.get(url_champs);
+        // Extract champion names from the data object
+        const champions = Object.keys(response1.data.data);
+        setChampionList(champions);
+
+        //const response2 = await axios.get(url_teams)
+        //console.log(response2.data)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, [url_champs]); // Added url to the dependency array
   const teamlist = ["team1", "team2", "team3", "team4"];
   return (
     <form className="max-w-sm mx-auto">
-      <div className="flex flex-col ...">
-        <label for="countries" class="block mb-2 text-sm font-medium">
+      <div className="flex flex-col">
+        <label for="countries" class="block mb-2 text-lg font-large">
           Select {team} side
         </label>
         <div className="mb-4">
