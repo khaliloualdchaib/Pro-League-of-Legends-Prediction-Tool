@@ -21,10 +21,19 @@ function App() {
         <div class="grid grid-cols-5 gap-4">
           <div>
             <div class="flex flex-col">
-              <div>
-                <LeagueSelection></LeagueSelection>
+              <div class="flex flex-row">
+                <div class="basis-1/2">
+                  <LeagueSelection></LeagueSelection>
+                </div>
+                <div class="basis-1/2">
+                  <button
+                    type="button"
+                    class="border focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 bg-gray-800 text-white border-gray-600 hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700"
+                  >
+                    PREDICT
+                  </button>
+                </div>
               </div>
-
               <div class="mt-2 max-w-sm p-5 rounded-lg shadow bg-gray-800 border-gray-700">
                 <ChampSelect team="blue" />
               </div>
