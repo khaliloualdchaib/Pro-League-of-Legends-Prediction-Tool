@@ -8,8 +8,8 @@ class Teams(Resource):
         return '/api/teams'
     
     def get(self):
-
-        return get_column_values_from_csv(3,teams=True)
+        teams_column_index = 3 
+        return get_column_values_from_csv(column_index=teams_column_index,teams=True)
             
 
     

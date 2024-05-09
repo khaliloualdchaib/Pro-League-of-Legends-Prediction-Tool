@@ -1,5 +1,7 @@
 import csv
 import json
+import pandas as pd
+from flask import make_response
 
 def get_column_values_from_csv(column_index, teams):
     if teams:
@@ -22,3 +24,40 @@ def get_column_values_from_csv(column_index, teams):
     return {"teams": values}
 
 
+
+def get_most_kills(player,champ = None,opponent = None,opponent_champ = None):
+    csv_file = "src/csv/players.csv"
+    
+    df = pd.read_csv(csv_file)
+
+    # Filter the DataFrame for the specified player
+    data = df[df['playername'] == player]
+
+    if champ and opponent is None and opponent_champ is None:
+        data = df[(df['playername'] == player) & (df['champion'] == champ)]
+
+    elif opponent and opponent_champ is None:
+        # Get the game IDs where the opponent played
+        opponent_game_ids = df[df['playername'] == opponent]['gameid'].unique()
+        # Filter the DataFrame for the specified player, champion, and opponent games
+        data = df[(df['playername'] == player) & (df['champion'] == champ) & df['gameid'].isin(opponent_game_ids)]
+
+    elif opponent_champ:
+        # Get the game IDs where the opponent played the opponent_champ
+        opponent_game_with_champ_ids = df[(df['playername'] == opponent) & (df['champion'] == opponent_champ)]['gameid'].unique()
+        print(opponent_game_with_champ_ids)
+        data = df[(df['playername'] == player) & (df['champion'] == champ) & df['gameid'].isin(opponent_game_with_champ_ids)]
+    
+    # Group the data by player name and calculate the average kills
+        
+    average_kills = data['kills'].mean()
+
+    return average_kills
+
+
+def response_400():
+    response_content = {
+            "status" : "400",
+            "data" : None
+        }
+    return make_response(response_content)
