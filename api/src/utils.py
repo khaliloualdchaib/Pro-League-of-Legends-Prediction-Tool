@@ -56,10 +56,31 @@ def get_most_kills(player,champ = None,opponent = None,opponent_champ = None):
         data = df[(df['playername'] == player) & (df['champion'] == champ) & df['gameid'].isin(opponent_game_with_champ_ids)]
     
     # Group the data by player name and calculate the average kills
-        
+    
     average_kills = data['kills'].mean()
-
+    
     return average_kills
+
+def get_players(team):
+    csv_file = "src/csv/players.csv"
+    
+    df = pd.read_csv(csv_file)
+
+    returnjson = {
+        "top" : [],
+        "jng" : [],
+        "mid" : [],
+        "bot" : [],
+        "sup" : []
+    }
+
+    players = set(df[df['teamname'] == team]['playername'])
+    for i in list(players):
+        position = df[df['playername'] == i]['position'].unique()
+        returnjson[position[0]].append(i)
+    
+    return returnjson
+
 
 
 def response_400():
@@ -67,4 +88,5 @@ def response_400():
             "status" : "400",
             "data" : None
         }
+    
     return make_response(response_content)

@@ -18,7 +18,6 @@ class Most_kills(Resource):
             return response400
         else:
             kills = get_most_kills(player=player,champ=champ,opponent=opponent,opponent_champ=opponent_champ)
-            print(kills)
             if kills is None:
                 return response400
             return {"Most Kills" : kills}
