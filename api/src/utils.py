@@ -9,7 +9,7 @@ def get_column_values_from_csv(column_index, teams):
     else:
         csv_file = "src/csv/players.csv"
 
-    values = []
+    values = set()
     with open(csv_file, 'r', encoding='utf-8') as file:
         csv_reader = csv.reader(file)
         
@@ -20,7 +20,7 @@ def get_column_values_from_csv(column_index, teams):
             if len(row) > column_index:  # Ensure the row has the specified column
                 value = row[column_index]  # Get the value from the specified column
                 if value.strip():  # Check if the value is not empty
-                    values.append(value.strip())
+                    values.add(value.strip())
     return {"teams": values}
 
 
@@ -35,6 +35,12 @@ def get_most_kills(player,champ = None,opponent = None,opponent_champ = None):
 
     if champ and opponent is None and opponent_champ is None:
         data = df[(df['playername'] == player) & (df['champion'] == champ)]
+
+    elif opponent and opponent_champ is None and champ is None:
+        # Get the game IDs where the opponent played
+        opponent_game_ids = df[df['playername'] == opponent]['gameid'].unique()
+        # Filter the DataFrame for the specified player, champion, and opponent games
+        data = df[(df['playername'] == player) & df['gameid'].isin(opponent_game_ids)]
 
     elif opponent and opponent_champ is None:
         # Get the game IDs where the opponent played
