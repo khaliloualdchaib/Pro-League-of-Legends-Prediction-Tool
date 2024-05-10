@@ -21,6 +21,7 @@ def get_column_values_from_csv(column_index, teams):
                 value = row[column_index]  # Get the value from the specified column
                 if value.strip():  # Check if the value is not empty
                     values.add(value.strip())
+    values = list(values)
     return {"teams": values}
 
 
