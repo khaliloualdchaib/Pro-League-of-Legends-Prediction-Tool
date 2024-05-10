@@ -1,37 +1,47 @@
 import RoleSelector from "./roleSelector";
+import React, {useEffect, useState } from "react";
+import axios from "axios";
+import Autocomplete from "./autoComplete";
+
 const TeamSelector = () => {
-  const teamlist = ["team1", "team2", "team3", "team4"];
+  const url_teams = "http://127.0.0.1:5000/api/teams";
+  const [teamlist, setTeamList] = useState([])
+  const [selectedTeam, setSelectedTeam] = useState("");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response1 = await axios.get(url_teams);
+        setTeamList(response1.data.teams);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  const handleTeamSelect = (team) => {
+    setSelectedTeam(team);
+  };
   return (
     <form>
-      <div className="flex flex-col">
-        <div>
-          <select className="w-full mr-2 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
-            <option selected disabled>
-              Choose a Team
-            </option>
-            {teamlist.map((Name) => (
-              <option key={Name} value={Name}>
-                {Name}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div>
+        <Autocomplete suggestions={teamlist} onSuggestionSelect={handleTeamSelect}/>
       </div>
-      <div class="flex flex-row">
-        <div class="basis-1/10">
-          <RoleSelector role={"Top"}></RoleSelector>
+      <div class="flex flex-nowrap">
+        <div>
+          <RoleSelector role={"Top"} team={selectedTeam}></RoleSelector>
         </div>
-        <div class="basis-1/10">
-          <RoleSelector role={"Jungle"}></RoleSelector>
+        <div>
+          <RoleSelector role={"Jungle"} team={selectedTeam}></RoleSelector>
         </div>
-        <div class="basis-1/10">
-          <RoleSelector role={"Mid"}></RoleSelector>
+        <div>
+          <RoleSelector role={"Mid"} team={selectedTeam}></RoleSelector>
         </div>
-        <div class="basis-1/10">
-          <RoleSelector role={"Bottom"}></RoleSelector>
+        <div>
+          <RoleSelector role={"Bottom"} team={selectedTeam}></RoleSelector>
         </div>
-        <div class="basis-1/10">
-          <RoleSelector role={"Support"}></RoleSelector>
+        <div>
+          <RoleSelector role={"Support"} team={selectedTeam}></RoleSelector>
         </div>
       </div>
     </form>

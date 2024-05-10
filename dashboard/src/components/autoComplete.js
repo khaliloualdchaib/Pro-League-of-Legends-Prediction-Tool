@@ -1,25 +1,9 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 
-const Autocomplete = () => {
-  const url_teams = "http://127.0.0.1:5000/api/teams";
-
-  const [suggestions, setSuggestions] = useState([]);
+const Autocomplete = ({suggestions, onSuggestionSelect }) => {
+  
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [inputValue, setInputValue] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response1 = await axios.get(url_teams);
-        setSuggestions(response1.data.teams);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData(); 
-  }, []); 
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
@@ -34,6 +18,7 @@ const Autocomplete = () => {
   const handleSuggestionClick = (suggestion) => {
     setInputValue(suggestion);
     setFilteredSuggestions([]);
+    onSuggestionSelect(suggestion);
   };
 
   return (
