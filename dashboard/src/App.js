@@ -18,11 +18,13 @@ function App() {
       <div className="App">
         <div class="flex flex-col">
           <h1>League of Legends Prediction Tool</h1>
-          <div className="mb-5">
-            <TeamSelector />
-          </div>
-          <div>
-            <TeamSelector />
+          <div className="flex flex-row">
+            <div className="basis-1/2 mr-5">
+              <TeamSelector />
+            </div>
+            <div className="basis-1/2">
+              <TeamSelector />
+            </div>
           </div>
           <div>
             <button
