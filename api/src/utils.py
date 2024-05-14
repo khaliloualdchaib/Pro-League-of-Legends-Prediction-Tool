@@ -2,6 +2,7 @@ import csv
 import json
 import pandas as pd
 from flask import make_response
+import sys
 
 def get_column_values_from_csv(column_index, teams):
     if teams:
@@ -23,7 +24,6 @@ def get_column_values_from_csv(column_index, teams):
                     values.add(value.strip())
     values = list(values)
     return {"teams": values}
-
 
 
 def get_most_kills(player,champ = None,opponent = None,opponent_champ = None):
@@ -112,10 +112,33 @@ def counter_pick(champ,opp_champ):
 
     data_champ_vs = df[(df['champion'] == champ)  & df['gameid'].isin(inner_join_game_ids)]
     
-    #avg kills champ
     avg_golddif_champ = data_champ_vs['golddiffat15'].mean()
 
-    return avg_golddif,avg_golddif_champ
+    result = 0
+
+    maximum = sys.maxsize
+    minimum = -sys.maxsize - 1
+
+    # Between -300 and 0
+    if avg_golddif >= avg_golddif_champ and avg_golddif_champ + 300 >= avg_golddif:
+        result = 0
+    # Between 0 and 300
+    elif avg_golddif <= avg_golddif_champ and avg_golddif + 300 >= avg_golddif_champ:
+        result = 0
+    # Between -300 and -700
+    elif avg_golddif >= avg_golddif_champ + 300 and avg_golddif_champ + 700 >= avg_golddif:
+        result = -0.10
+    # Between 300 and 700
+    elif avg_golddif + 300 <= avg_golddif_champ and avg_golddif + 700 > avg_golddif_champ:
+        result = 0.10
+    # Between -700 and -infinity
+    elif avg_golddif >= avg_golddif_champ + 700 and avg_golddif_champ + minimum >= avg_golddif:
+        result = -0.20
+    # Between 700 and infinity
+    elif avg_golddif + 700 <= avg_golddif_champ and avg_golddif + maximum > avg_golddif_champ:
+        result = 0.20
+
+    return result
 
 
 
