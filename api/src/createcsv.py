@@ -14,7 +14,7 @@ teams_data = df[df['position'] == 'team']
 
 # Create a new DataFrame with only selected columns
 # Teamkills, teamdeaths maybe ?
-players_columns  = ['gameid', 'side', 'position', 'playername', 'playerid', 'teamname', 'teamid', 'champion', 'result', 'kills', 'deaths', 'assists', 'firstblood', 'firstbloodkill', 'firstbloodvictim']
+players_columns  = ['gameid', 'side', 'position', 'playername', 'playerid', 'teamname', 'teamid', 'champion', 'result', 'kills', 'deaths', 'assists', 'firstblood', 'firstbloodkill', 'firstbloodvictim', "golddiffat15"]
 teams_columns  = ['gameid', 'side', 'teamname', 'teamid', 'result', 'firstblood','team kpm', 'firstdragon', 'firstherald', 'firstbaron', 'firsttower' ]
 
 

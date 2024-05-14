@@ -90,3 +90,34 @@ def response_400():
         }
     
     return make_response(response_content)
+
+def counter_pick(champ,opp_champ):
+
+    csv_file = "src/csv/players.csv"
+    
+    df = pd.read_csv(csv_file)
+
+    data_champ = df[(df['champion'] == champ)]
+
+    avg_golddif = data_champ['golddiffat15'].mean()
+
+    # Get the game IDs where the champ played
+    champ_game_ids = set(df[df['champion'] == champ]['gameid'].unique())
+
+    # Get the game IDs where the opp_champ played
+    opp_champ_game_ids = set(df[df['champion'] == opp_champ]['gameid'].unique())
+
+    # Calculate the inner join of game IDs
+    inner_join_game_ids = champ_game_ids.intersection(opp_champ_game_ids)
+
+    data_champ_vs = df[(df['champion'] == champ)  & df['gameid'].isin(inner_join_game_ids)]
+    
+    #avg kills champ
+    avg_golddif_champ = data_champ_vs['golddiffat15'].mean()
+
+    return avg_golddif,avg_golddif_champ
+
+
+
+
+
