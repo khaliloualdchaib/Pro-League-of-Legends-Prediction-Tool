@@ -13,6 +13,10 @@ class Most_kills(Resource):
         opponent = request.args.get('opponent')
         opponent_champ = request.args.get('opponent_champ')
         
+        
+            
+
+
         response400 = response_400()
         if player is None:
             return response400
