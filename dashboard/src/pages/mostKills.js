@@ -1,112 +1,137 @@
-import { useEffect } from "react";
-import * as d3 from "d3";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+import HC_more from "highcharts/highcharts-more";
+import Radio from "../components/radio";
 
-//reference:
-//https://codesandbox.io/p/sandbox/react-d3-demo--bar-chart-with-scales-and-axes-vf86v6?file=%2Fsrc%2FApp.jsx&from-embed=
+HC_more(Highcharts);
 
-const marginTop = 30;
-const marginBottom = 70;
-const marginLeft = 50;
-const marginRight = 25;
-
-const BarChart = ({ width, height, data, color, chartId }) => {
-  const chartBottomY = height - marginBottom;
-
-  const xScale = d3
-    .scaleBand()
-    .domain(data.map((d) => d.Role))
-    .range([marginLeft, width - marginRight])
-    .padding(0.1);
-
-  const xAxis = d3.axisBottom(xScale).tickSizeOuter(0);
-
-  // Create the vertical scale and its axis generator.
-  const yScale = d3
-    .scaleLinear()
-    .domain([0, 100])
-    .nice()
-    .range([chartBottomY, marginTop]);
-
-  const yAxis = d3.axisLeft(yScale);
-
-  useEffect(() => {
-    d3.select(`#${chartId}-x-axis`)
-      .call(xAxis)
-      .selectAll("text")
-      .attr("font-size", "14px")
-      .attr("transform", "rotate(-45)")
-      .attr("text-anchor", "end");
-    d3.select(`#${chartId}-y-axis`)
-      .call(yAxis)
-      .selectAll("text")
-      .attr("font-size", "14px");
-  }, [xAxis, yAxis, chartId]);
-
-  return (
-    <div className="container">
-      <svg
-        width={width}
-        height={height}
-        viewBox={`0 0 ${width} ${height}`}
-        className="viz"
-      >
-        <g className="bars">
-          {data.map((d) => (
-            <rect
-              key={d.Role}
-              x={xScale(d.Role)}
-              y={yScale(d.Prediction)}
-              height={chartBottomY - yScale(d.Prediction)}
-              width={xScale.bandwidth()}
-              fill={color}
-            />
-          ))}
-        </g>
-        <g
-          id={`${chartId}-x-axis`}
-          transform={`translate(0,${chartBottomY})`}
-        ></g>
-        <g
-          id={`${chartId}-y-axis`}
-          transform={`translate(${marginLeft},0)`}
-        ></g>
-      </svg>
-    </div>
-  );
+Highcharts.theme = {
+  chart: {
+    backgroundColor: "#282c34",
+  },
+  title: {
+    style: {
+      color: "#E0E0E3",
+      textTransform: "uppercase",
+      fontSize: "20px",
+    },
+  },
+  xAxis: {
+    labels: {
+      style: {
+        color: "#E0E0E3",
+      },
+    },
+  },
+  yAxis: {
+    gridLineColor: "#707073",
+    labels: {
+      style: {
+        color: "#E0E0E3",
+      },
+    },
+  },
+  tooltip: {
+    backgroundColor: "rgba(0, 0, 0)",
+    style: {
+      color: "#F0F0F0",
+    },
+  },
 };
 
+Highcharts.setOptions(Highcharts.theme);
+
+const options = (title, color, data) => ({
+  chart: {
+    renderTo: "container",
+    type: "column",
+  },
+  title: {
+    text: title,
+  },
+  xAxis: {
+    categories: ["Top", "Jungle", "Mid", "Bottom", "Support"],
+    title: {
+      text: "Role",
+    },
+  },
+  yAxis: {
+    title: {
+      text: "Probability(%)",
+    },
+    tickInterval: 10,
+  },
+  tooltip: {
+    pointFormat: "<b>Probability</b>: {point.y}%",
+  },
+  plotOptions: {
+    column: {
+      color: color,
+    },
+  },
+  series: [
+    {
+      showInLegend: false,
+      data: [
+        {
+          name: "Top",
+          y: data["Top"],
+        },
+        {
+          name: "Jungle",
+          y: data["Jungle"],
+        },
+        {
+          name: "Mid",
+          y: data["Mid"],
+        },
+        {
+          name: "Bottom",
+          y: data["Bottom"],
+        },
+        {
+          name: "Support",
+          y: data["Support"],
+        },
+      ],
+    },
+  ],
+});
 const MostKills = () => {
-  const data = [
-    { Role: "Top", Prediction: 70 },
-    { Role: "Jungle", Prediction: 80 },
-    { Role: "Mid", Prediction: 60 },
-    { Role: "Bottom", Prediction: 30 },
-    { Role: "Support", Prediction: 5 },
-  ];
+  const dataProbsRed = {
+    Top: 80,
+    Jungle: 75,
+    Mid: 90,
+    Bottom: 50,
+    Support: 15,
+  };
+  const dataProbsBlue = {
+    Top: 80,
+    Jungle: 75,
+    Mid: 90,
+    Bottom: 50,
+    Support: 15,
+  };
+  const red = "#FF0000";
+  const blue = "#0000FF";
   return (
-    <div>
-      <h1>Prediction for most kills per Team(%)</h1>
-      <div className="flex flex-row">
-        <div className="basis-1/2">
-          <BarChart
-            data={data}
-            width={450}
-            height={500}
-            color={"#6baed6"}
-            chartId="chart1"
-          />
+    <>
+      <div class="flex flex-nowrap justify-center">
+        <div>
+          <HighchartsReact
+            highcharts={Highcharts}
+            options={options("Number of Kills Red Team", red, dataProbsRed)}
+          ></HighchartsReact>
         </div>
-        <div className="basis-1/2">
-          <BarChart
-            data={data}
-            width={450}
-            height={500}
-            color={"red"}
-            chartId="chart2"
-          />
+        <div>
+          <HighchartsReact
+            highcharts={Highcharts}
+            options={options("Number of Kills  Blue Team", blue, dataProbsBlue)}
+          ></HighchartsReact>
         </div>
       </div>
-    </div>
+      <Radio options={["test1", "test2", "test3"]}></Radio>
+    </>
   );
 };
 
