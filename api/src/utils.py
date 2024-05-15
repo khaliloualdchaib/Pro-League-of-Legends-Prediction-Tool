@@ -141,6 +141,41 @@ def counter_pick(champ,opp_champ):
     return result
 
 
+def get_most_kills_prediction(player1,champ1,
+                              player2,champ2,
+                              player3,champ3,
+                              player4,champ4,
+                              player5,champ5,
+                              opp_player1,opp_champ1,
+                              opp_player2,opp_champ2,
+                              opp_player3,opp_champ3,
+                              opp_player4,opp_champ4,
+                              opp_player5,opp_champ5):
+    
+    players = [player1,player2,player3,player4,player5]
+    champs = [champ1,champ2,champ3,champ4,champ5]
+    opp_players = [opp_player1,opp_player2,opp_player3,opp_player4,opp_player5]
+    opp_champs = [opp_champ1,opp_champ2,opp_champ3,opp_champ4,opp_champ5]
+
+    counter_picks = []
+    most_kills_avg_player = []
+    most_kills_avg_player_champ = []
+    most_kills_avg_player_vs_opp = []
+    most_kills_avg_player_champ_vs_opp_champ = []
+    for i in range(len(players)):
+        counter_picks.append(counter_pick(champs[i],opp_champs[i]))
+        most_kills_avg_player.append(get_most_kills(players[i]))
+        most_kills_avg_player_champ.append(get_most_kills(players[i],champ=champs[i]))
+        most_kills_avg_player_vs_opp.append(get_most_kills(players[i],opponent=opp_players[i]))
+        most_kills_avg_player_champ_vs_opp_champ.append(get_most_kills(players[i],champ=champs[i],opponent=opp_players[i],opponent_champ=opp_champs[i]))
+
+
+    avg_player = 0.25
+    avg_player_champ = 0.5 
+    avg_player_vs_opp = 0.5 
+    avg_player_champ_vs_opp_champ = 0.75
+
+    return 0
 
 
 
