@@ -1,6 +1,9 @@
+// MostKills.js
+import React, { useContext, useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HC_more from "highcharts/highcharts-more";
+import { ClickContext } from "../components/ClickContext";
 import Radio from "../components/radio";
 
 HC_more(Highcharts);
@@ -97,7 +100,15 @@ const options = (title, color, data) => ({
     },
   ],
 });
+
 const MostKills = () => {
+  const { isClicked } = useContext(ClickContext);
+  useEffect(() => {
+    const fetchData = async () => {
+      
+    };
+    fetchData();
+  }, []);
   const dataProbsRed = {
     Top: 80,
     Jungle: 75,
@@ -114,23 +125,32 @@ const MostKills = () => {
   };
   const red = "#FF0000";
   const blue = "#0000FF";
+
   return (
     <>
-      <div class="flex flex-nowrap justify-center">
-        <div>
-          <HighchartsReact
-            highcharts={Highcharts}
-            options={options("Number of Kills Red Team", red, dataProbsRed)}
-          ></HighchartsReact>
-        </div>
-        <div>
-          <HighchartsReact
-            highcharts={Highcharts}
-            options={options("Number of Kills  Blue Team", blue, dataProbsBlue)}
-          ></HighchartsReact>
-        </div>
-      </div>
-      <Radio options={["test1", "test2", "test3"]}></Radio>
+      {isClicked && (
+        <>
+          <div className="flex flex-nowrap justify-center">
+            <div>
+              <HighchartsReact
+                highcharts={Highcharts}
+                options={options("Number of Kills Red Team", red, dataProbsRed)}
+              ></HighchartsReact>
+            </div>
+            <div>
+              <HighchartsReact
+                highcharts={Highcharts}
+                options={options(
+                  "Number of Kills  Blue Team",
+                  blue,
+                  dataProbsBlue
+                )}
+              ></HighchartsReact>
+            </div>
+          </div>
+          <Radio options={["test1", "test2", "test3"]}></Radio>
+        </>
+      )}
     </>
   );
 };

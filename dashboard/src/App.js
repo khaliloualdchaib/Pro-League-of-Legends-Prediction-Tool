@@ -1,7 +1,7 @@
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import { BrowserRouter as Router } from "react-router-dom";
-
+// App.js
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ClickProvider from "./components/ClickContext";
 import MainTabs from "./components/mainTabs";
 import FirstBlood from "./pages/firstBlood";
 import FirstTower from "./pages/firstTower";
@@ -11,49 +11,35 @@ import FirstInhibitor from "./pages/firstInhibitor";
 import MostKills from "./pages/mostKills";
 import WinPage from "./pages/win";
 import Input from "./components/input";
+import "./App.css";
+
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <div class="flex flex-col">
-          <h1>League of Legends Prediction Tool</h1>
-          <Input></Input>
-          <div className="flex justify-center">
-            <MainTabs></MainTabs>
-          </div>
-          <div className="mt-5">
-            <Routes>
-              <Route path="/" element={<FirstBlood></FirstBlood>}></Route>
-              <Route
-                path="/FirstBlood"
-                element={<FirstBlood></FirstBlood>}
-              ></Route>
-              <Route
-                path="/FirstTower"
-                element={<FirstTower></FirstTower>}
-              ></Route>
-              <Route
-                path="/FirstDragon"
-                element={<FirstDragon></FirstDragon>}
-              ></Route>
-              <Route
-                path="/FirstBaron"
-                element={<FirstBaron></FirstBaron>}
-              ></Route>
-              <Route
-                path="/FirstInhibitor"
-                element={<FirstInhibitor></FirstInhibitor>}
-              ></Route>
-              <Route
-                path="/MostKills"
-                element={<MostKills></MostKills>}
-              ></Route>
-              <Route path="/Winner" element={<WinPage></WinPage>}></Route>
-            </Routes>
+    <ClickProvider>
+      <Router>
+        <div className="App">
+          <div className="flex flex-col">
+            <h1>League of Legends Prediction Tool</h1>
+            <Input />
+            <div className="flex justify-center">
+              <MainTabs />
+            </div>
+            <div className="mt-5">
+              <Routes>
+                <Route path="/" element={<FirstBlood />} />
+                <Route path="/FirstBlood" element={<FirstBlood />} />
+                <Route path="/FirstTower" element={<FirstTower />} />
+                <Route path="/FirstDragon" element={<FirstDragon />} />
+                <Route path="/FirstBaron" element={<FirstBaron />} />
+                <Route path="/FirstInhibitor" element={<FirstInhibitor />} />
+                <Route path="/MostKills" element={<MostKills />} />
+                <Route path="/Winner" element={<WinPage />} />
+              </Routes>
+            </div>
           </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </ClickProvider>
   );
 }
 

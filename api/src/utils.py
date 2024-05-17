@@ -52,7 +52,6 @@ def get_most_kills(player,champ = None,opponent = None,opponent_champ = None):
     elif opponent_champ:
         # Get the game IDs where the opponent played the opponent_champ
         opponent_game_with_champ_ids = df[(df['playername'] == opponent) & (df['champion'] == opponent_champ)]['gameid'].unique()
-        print(opponent_game_with_champ_ids)
         data = df[(df['playername'] == player) & (df['champion'] == champ) & df['gameid'].isin(opponent_game_with_champ_ids)]
     
     # Group the data by player name and calculate the average kills

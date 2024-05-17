@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Autocomplete from "./autoComplete";
+import { ClickContext } from "./ClickContext";
 const get_players = async (team) => {
   try {
     const url_players = "http://127.0.0.1:5000/api/players?team=" + team;
@@ -21,6 +22,8 @@ const get_players = async (team) => {
 };
 
 const Input = () => {
+  const { setIsClicked } = useContext(ClickContext);
+
   const roles = ["Top", "Jungle", "Mid", "Bottom", "Support"];
   const patch = "14.9.1";
   const url_teams = "http://127.0.0.1:5000/api/teams";
@@ -72,7 +75,43 @@ const Input = () => {
       }
     };
     fetchData();
-  }, []); 
+  }, [url_champs]);
+
+  const formSubmit = async (event) => {
+    event.preventDefault();
+    setIsClicked(true);
+    const champComp1 = {
+      Top: selectedTop1,
+      Jungle: selectedJungle1,
+      Mid: selectedMid1,
+      Bottom: selectedADC1,
+      Support: selectedSupport1,
+    };
+    const champComp2 = {
+      Top: selectedTop2,
+      Jungle: selectedJungle2,
+      Mid: selectedMid2,
+      Bottom: selectedADC2,
+      Support: selectedSupport2,
+    };
+
+    const big_url =
+      "http://127.0.0.1:5000/api/main?team1Players=" +
+      encodeURIComponent(JSON.stringify(selectedPlayers1)) +
+      "&team1Champs=" +
+      encodeURIComponent(JSON.stringify(champComp1)) +
+      "&team2Players=" +
+      encodeURIComponent(JSON.stringify(selectedPlayers2)) +
+      "&team2Champs=" +
+      encodeURIComponent(JSON.stringify(champComp2));
+
+    try {
+      const response = await axios.get(big_url);
+      console.log(response.data);
+    } catch (error) {
+      console.error("There was an error with the request:", error);
+    }
+  };
 
   const handleTeam1Select = async (team) => {
     setSelectedTeam1(team);
@@ -236,6 +275,7 @@ const Input = () => {
         </div>
       </div>
       <button
+        onClick={formSubmit}
         type="submit"
         class="border w-full focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 bg-gray-800 text-white border-gray-600 hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700"
       >
