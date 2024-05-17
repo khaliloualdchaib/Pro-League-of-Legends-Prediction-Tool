@@ -182,7 +182,7 @@ file_path = f'csv\{2024}_LoL_esports_match_data_from_OraclesElixir(1).csv'
 # Read the CSV file into a pandas DataFrame
 df = pd.read_csv(file_path)
 
-players_and_teams(df)
+#players_and_teams(df)
 #csv_players_statiscs(df)
 #players_statiscs_first(df)
 

@@ -3,6 +3,10 @@ import json
 import pandas as pd
 from flask import make_response
 import sys
+import joblib
+
+roles = ['top', 'jng', 'mid', 'bot', 'sup']
+sides = ['Blue', 'Red']
 
 def get_column_values_from_csv(column_index, teams):
     if teams:
@@ -113,7 +117,9 @@ def calculate_player_stats(player_name, champion):
     player_data = df[(df['playername'] == player_name) & (df['champion'] == champion)]
 
     if player_data.empty:
-        return None
+        
+        return 0, 0, 0, 0, 0, 0, 0
+    
     
     kills = player_data['kills'].mean()
     deaths = player_data['deaths'].replace(0, 1).mean()
@@ -133,4 +139,62 @@ def calculate_player_stats(player_name, champion):
     wr = round(player_data['result'].mean() * 100, 2)
     gp = player_data.shape[0]
 
+    print(kda, kda15, kda10, golddiffat10, golddiffat15, wr, gp)
     return kda, kda15, kda10, golddiffat10, golddiffat15, wr, gp
+
+
+def get_predictions(team1Players,team1Champs, team2Players, team2Champs, prediction_target):
+    """
+    Get predictions for the specified player and champion using the saved model.
+
+    Parameters:
+    player_name (str): Name of the player.
+    champion (str): Name of the champion.
+    prediction_target (str): Type of prediction target ('result', 'firstblood', 'firstbaron', 'firsttower','firstdragon').
+
+    Returns:
+    str: Predicted outcome ('Win' or 'Loss' for binary predictions).
+    """
+    # Load the saved model
+    model_filename = f"src/Models/{prediction_target}_model.pkl"
+
+    classifier = joblib.load(model_filename)
+
+    input_data = pd.DataFrame()
+
+    players = []
+    champs = []
+
+    newroles = roles * 2
+    newsides = sides * 5
+
+    for i in range(len(team1Players)):
+        players.append(team1Players[i])
+        champs.append(team1Champs[i])
+        players.append(team2Players[i])
+        champs.append(team2Champs[i])
+
+    print(players)
+    print(champs)
+    
+    for i in range(len(players)):
+        print(players[i], champs[i])
+        kda, kda15, kda10, golddiffat10, golddiffat15, wr, gp = calculate_player_stats(players[i], champs[i])
+    """
+        input_data[f"{newsides[i]}{newroles[i]}gp"] = gp
+        input_data[f"{newsides[i]}{newroles[i]}wr"] = wr
+        input_data[f"{newsides[i]}{newroles[i]}kda10"] = kda10
+        input_data[f"{newsides[i]}{newroles[i]}kda15"] = kda15
+        input_data[f"{newsides[i]}{newroles[i]}golddiffat10"] = golddiffat10
+        input_data[f"{newsides[i]}{newroles[i]}golddiffat15"] = golddiffat15
+    
+    # Make predictions
+    prediction = classifier.predict(X_input)
+
+    # Interpret prediction based on the target
+    if prediction_target == 'result':
+        return 'Win' if prediction == 1 else 'Loss'
+    # Add more conditions for other prediction targets if needed
+
+    return prediction  # Return raw prediction if not binary
+    """     

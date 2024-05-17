@@ -170,16 +170,18 @@ def train_and_evaluate_model(prediction_target, feature_list, first=False):
     #get_feature_importance(classifier=classifier, X_train=X_train)
 
 
-# Define prediction targets and associated features
-prediction_targets = {
-    'result': ['result', 'gameid'],
-    'firsttower': ['firsttower', 'gameid', 'firstbaron', 'firstherald', 'firstdragon', 'firstblood', 'result'],
-    #'firstblood': ['firstblood', 'gameid', 'firstdragon', 'firstherald', 'firstbaron', 'firsttower', 'result'],
-    'firstbaron': ['firstbaron', 'gameid', 'firsttower', 'firstherald', 'firstdragon', 'firstblood', 'result'],
-    #'firstdragon': ['firstdragon', 'gameid', 'firsttower', 'firstherald', 'firstbaron', 'firstblood', 'result']
-}
+def make_models():
+    # Define prediction targets and associated features
+    prediction_targets = {
+        'result': ['result', 'gameid'],
+        'firsttower': ['firsttower', 'gameid', 'firstbaron', 'firstherald', 'firstdragon', 'firstblood', 'result'],
+        #'firstblood': ['firstblood', 'gameid', 'firstdragon', 'firstherald', 'firstbaron', 'firsttower', 'result'],
+        'firstbaron': ['firstbaron', 'gameid', 'firsttower', 'firstherald', 'firstdragon', 'firstblood', 'result'],
+        #'firstdragon': ['firstdragon', 'gameid', 'firsttower', 'firstherald', 'firstbaron', 'firstblood', 'result']
+    }
 
-# Train and evaluate models for each prediction target
-for target, features in prediction_targets.items():
-    train_and_evaluate_model(target, features, first=(target != 'result'))
+    # Train and evaluate models for each prediction target
+    for target, features in prediction_targets.items():
+        train_and_evaluate_model(target, features, first=(target != 'result'))
+
 
