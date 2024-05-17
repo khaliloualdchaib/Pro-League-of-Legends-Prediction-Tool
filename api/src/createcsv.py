@@ -43,7 +43,7 @@ for gameid in tqdm(new_df['gameid']):
         for s in sides:
             result = df[(df['gameid'] == gameid) & (df['side'] == 'Blue')]['result'].iloc[0]
             gp,wr,kda = calculate_player_statistics(gameid,r,s,df)
-            new_df.loc[new_df['gameid'] == gameid, s+r+"gd"] = gp
+            new_df.loc[new_df['gameid'] == gameid, s+r+"gp"] = gp
             new_df.loc[new_df['gameid'] == gameid, s+r+"wr"] = wr
             new_df.loc[new_df['gameid'] == gameid, s+r+"kda"] = kda
             new_df.loc[new_df['gameid'] == gameid, "result"] = result
