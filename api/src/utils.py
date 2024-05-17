@@ -92,3 +92,45 @@ def response_400():
 
 
 
+def calculate_player_stats(player_name, champion):
+    """
+    Calculate player statistics including KDA at 10 and 15 minutes, gold difference at 10 and 15 minutes, and win rate.
+
+    Parameters:
+    player_name (str): Name of the player.
+    champion (str): Name of the champion.
+    df (pd.DataFrame): DataFrame containing the game data.
+
+    Returns:
+    tuple: A tuple containing KDA at 10 minutes, KDA at 15 minutes, gold difference at 10 minutes,
+           gold difference at 15 minutes, and win rate.
+    """
+
+    csv_file = "src/csv/players.csv"
+
+    df = pd.read_csv(csv_file)
+
+    player_data = df[(df['playername'] == player_name) & (df['champion'] == champion)]
+
+    if player_data.empty:
+        return None
+    
+    kills = player_data['kills'].mean()
+    deaths = player_data['deaths'].replace(0, 1).mean()
+    kda = round(kills / deaths, 2)
+
+    kills10 = player_data['killsat10'].mean()
+    deaths10 = player_data['deathsat10'].replace(0, 1).mean()
+    kda10 = round(kills10 / deaths10, 2)
+
+    kills15 = player_data['killsat15'].mean()
+    deaths15 = player_data['deathsat15'].replace(0, 1).mean()
+    kda15 = round(kills15 / deaths15, 2)
+
+    golddiffat10 = round(player_data['golddiffat10'].mean(), 2)
+    golddiffat15 = round(player_data['golddiffat15'].mean(), 2)
+
+    wr = round(player_data['result'].mean() * 100, 2)
+    gp = player_data.shape[0]
+
+    return kda, kda15, kda10, golddiffat10, golddiffat15, wr, gp
