@@ -4,7 +4,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 from sklearn.metrics import roc_auc_score
-import matplotlib.pyplot as plt
 import joblib
 
 
@@ -22,14 +21,7 @@ def get_feature_importance(classifier, X_train):
     # Print or display the DataFrame
     print(feature_importance_df)
 
-    # Assuming feature_importance_df contains your DataFrame with feature importances
-    # Plot feature importances
-    plt.figure(figsize=(10, 6))
-    plt.barh(feature_importance_df['Feature'], feature_importance_df['Importance'])
-    plt.xlabel('Importance')
-    plt.ylabel('Feature')
-    plt.title('Feature Importances')
-    plt.show()
+    return feature_importance_df
 
 def pre_process(drop,result,first=False):
     # Replace 'file_path.csv' with the path to your CSV file
@@ -86,8 +78,6 @@ def first_tower_prediction():
     print("Area under the ROC curve (AUC):", auc)
     print(classification_report(y_test, predictions))
 
-    get_feature_importance(classifier=classifier,X_train=X_train)
-
 def first_blood_prediction():
     print("First Blood Prediction Results\n")
  
@@ -119,7 +109,6 @@ def first_baron_prediction():
     print("Area under the ROC curve (AUC):", auc)
     print(classification_report(y_test, predictions))
 
-    get_feature_importance(classifier=classifier,X_train=X_train)
 
 def first_dragon_prediction():
     print("First Dragon Prediction Results\n")
@@ -167,7 +156,13 @@ def train_and_evaluate_model(prediction_target, feature_list, first=False):
     print("Area under the ROC curve (AUC):", auc)
     print(classification_report(y_test, predictions))
 
-    #get_feature_importance(classifier=classifier, X_train=X_train)
+    # Get feature importance
+    feature_importance_df = get_feature_importance(classifier, X_train)
+
+    # Save feature importance to a CSV file
+    feature_importance_filename = f"Models/{prediction_target}_feature_importance.csv"
+    feature_importance_df.to_csv(feature_importance_filename, index=False)
+    print(f"Feature importance saved to {feature_importance_filename}")
 
 
 def make_models():
@@ -185,3 +180,4 @@ def make_models():
         train_and_evaluate_model(target, features, first=(target != 'result'))
 
 
+make_models()
