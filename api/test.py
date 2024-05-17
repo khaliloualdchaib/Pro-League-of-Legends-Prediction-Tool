@@ -1,4 +1,4 @@
-from src.utils import get_column_values_from_csv, get_players, calculate_player_stats, get_predictions
+from src.utils import get_column_values_from_csv, get_players, calculate_player_stats, get_predictions, load_feature_importance
 
 
 
@@ -14,3 +14,4 @@ team2Players = ["fNb","Aegis","Grevthar","Brance","JoJo"]
 team2Champs = ["K'Sante","Jax","Neeko","Aphelios","Nautilus"]
 
 print(get_predictions(team1Players=team1Players,team1Champs=team1Champs,team2Players=team2Players,team2Champs=team2Champs,prediction_target="result"))
+print(load_feature_importance("firstbaron"))

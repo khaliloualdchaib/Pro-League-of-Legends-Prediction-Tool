@@ -183,7 +183,6 @@ def get_predictions(team1Players,team1Champs, team2Players, team2Champs, predict
         input_data[f"{newsides[i]}{newroles[i]}wr"] = wr
         if prediction_target == 'result':
             input_data[f"{newsides[i]}{newroles[i]}kda"] = kda
-            print(kda)
         else:
             input_data[f"{newsides[i]}{newroles[i]}kda10"] = kda10
             input_data[f"{newsides[i]}{newroles[i]}kda15"] = kda15
@@ -194,3 +193,19 @@ def get_predictions(team1Players,team1Champs, team2Players, team2Champs, predict
     prediction = classifier.predict(input_data)
 
     return prediction[0]  # Return raw prediction if not binary
+
+
+def load_feature_importance(prediction_target):
+    """
+    Load the feature importance CSV for a given prediction target.
+
+    Parameters:
+    prediction_target (str): The target variable for prediction ('firstbaron','firsttower','result').
+
+    Returns:
+    DataFrame: The feature importance DataFrame.
+    """
+    feature_importance_filename = f"src/Models/{prediction_target}_feature_importance.json"
+    with open(feature_importance_filename, 'r') as f:
+        return json.load(f)
+

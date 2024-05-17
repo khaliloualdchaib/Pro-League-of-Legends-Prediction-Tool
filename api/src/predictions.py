@@ -5,6 +5,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 from sklearn.metrics import roc_auc_score
 import joblib
+import json
 
 
 
@@ -159,9 +160,13 @@ def train_and_evaluate_model(prediction_target, feature_list, first=False):
     # Get feature importance
     feature_importance_df = get_feature_importance(classifier, X_train)
 
-    # Save feature importance to a CSV file
-    feature_importance_filename = f"Models/{prediction_target}_feature_importance.csv"
-    feature_importance_df.to_csv(feature_importance_filename, index=False)
+    # Convert DataFrame to dictionary
+    feature_importance_dict = feature_importance_df.to_dict(orient='records')
+
+    # Save feature importance to a JSON file
+    feature_importance_filename = f"Models/{prediction_target}_feature_importance.json"
+    with open(feature_importance_filename, 'w') as f:
+        json.dump(feature_importance_dict, f, indent=4)
     print(f"Feature importance saved to {feature_importance_filename}")
 
 
