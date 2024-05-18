@@ -1,8 +1,7 @@
 from flask import request, jsonify
 from flask_restful import Resource
 import json
-from .utils import response_400, get_most_kills
-
+from .utils import response_400, load_feature_importance
 class MainEndpoint(Resource):
     def route():
         return '/api/main'
@@ -14,17 +13,16 @@ class MainEndpoint(Resource):
             team2Players = json.loads(request.args.get('team2Players'))
             team2Champs = json.loads(request.args.get('team2Champs'))
 
-            print("Team 1 Players:", team1Players)
-            print("Team 1 Champs:", team1Champs)
-            print("Team 2 Players:", team2Players)
-            print("Team 2 Champs:", team2Champs)
+            importance = ['firstbaron','firsttower','result']
+
+            predictions = {}
+            predictions["importance"] = {}
+
+            for pred in importance:
+                predictions["importance"][pred] = load_feature_importance(pred)
 
             responsejson = {
-                "First Blood": None,
-                "First Tower": None,
-                "First Drake": None,
-                "Most Kills": None,
-                "Winning Team": None
+                "predictions": predictions
             } 
 
             return jsonify(responsejson)

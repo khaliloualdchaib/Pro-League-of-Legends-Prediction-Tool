@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Autocomplete from "./autoComplete";
 import { ClickContext } from "./ClickContext";
+import { ResponseContext } from "./ResponseContext";
+
 const get_players = async (team) => {
   try {
     const url_players = "http://127.0.0.1:5000/api/players?team=" + team;
@@ -23,7 +25,7 @@ const get_players = async (team) => {
 
 const Input = () => {
   const { setIsClicked } = useContext(ClickContext);
-
+  const { setResponseData } = useContext(ResponseContext);
   const roles = ["Top", "Jungle", "Mid", "Bottom", "Support"];
   const patch = "14.9.1";
   const url_teams = "http://127.0.0.1:5000/api/teams";
@@ -107,7 +109,8 @@ const Input = () => {
 
     try {
       const response = await axios.get(big_url);
-      console.log(response.data);
+      //console.log(response.data);
+      setResponseData(response.data);
     } catch (error) {
       console.error("There was an error with the request:", error);
     }

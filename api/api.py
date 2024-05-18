@@ -10,7 +10,6 @@ api = Api(app)
 CORS(app)
 
 api.add_resource(src.Teams, src.Teams.route())
-api.add_resource(src.Most_kills, src.Most_kills.route())
 api.add_resource(src.Players, src.Players.route())
 api.add_resource(src.MainEndpoint, src.MainEndpoint.route())
 
