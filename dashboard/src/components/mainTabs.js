@@ -19,7 +19,7 @@ const MainTabs = () => {
             to="/FirstTower"
             class={location.pathname === "/FirstTower" ? activeTab : normalTab}
           >
-            First Tower
+            Win rate
           </Link>
         </li>
         <li class="me-2">
@@ -27,7 +27,7 @@ const MainTabs = () => {
             to="/FirstDragon"
             class={location.pathname === "/FirstDragon" ? activeTab : normalTab}
           >
-            First Dragon
+            Gold Difference
           </Link>
         </li>
         <li class="me-2">
@@ -35,7 +35,7 @@ const MainTabs = () => {
             to="/FirstBaron"
             class={location.pathname === "/FirstBaron" ? activeTab : normalTab}
           >
-            First Baron
+            KDA
           </Link>
         </li>
         <li class="me-2">
@@ -43,7 +43,7 @@ const MainTabs = () => {
             to="/Winner"
             class={location.pathname === "/Winner" ? activeTab : normalTab}
           >
-            Winner
+            Player Stats
           </Link>
         </li>
       </ul>

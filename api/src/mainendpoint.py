@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from flask_restful import Resource
 import json
-from .utils import response_400, load_feature_importance
+from .utils import response_400, load_feature_importance, get_predictions
 class MainEndpoint(Resource):
     def route():
         return '/api/main'
@@ -17,9 +17,19 @@ class MainEndpoint(Resource):
 
             predictions = {}
             predictions["importance"] = {}
+            predictions["classifications"] = {}
+
+
+            team1Players_list = list(team1Players.values())
+            team1Champs_list = list(team1Champs.values())
+            team2Players_list = list(team2Players.values())
+            team2Champs_list = list(team2Champs.values())
 
             for pred in importance:
                 predictions["importance"][pred] = load_feature_importance(pred)
+
+                classification = get_predictions(team1Players_list, team1Champs_list, team2Players_list, team2Champs_list, pred)
+                predictions["classifications"][pred] = classification
 
             responsejson = {
                 "predictions": predictions
