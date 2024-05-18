@@ -40,8 +40,8 @@ const MainTabs = () => {
         </li>
         <li class="me-2">
           <Link
-            to="/Winner"
-            class={location.pathname === "/Winner" ? activeTab : normalTab}
+            to="/PlayerStats"
+            class={location.pathname === "/PlayerStats" ? activeTab : normalTab}
           >
             Player Stats
           </Link>

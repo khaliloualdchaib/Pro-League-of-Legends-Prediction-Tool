@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ClickProvider from "./components/ClickContext";
 import MainTabs from "./components/mainTabs";
 import FirstTower from "./pages/firstTower";
-import FirstBaron from "./pages/firstBaron";
+import PlayerStats from "./pages/playerStats";
 import FirstDragon from "./pages/firstDragon";
 import WinPage from "./pages/win";
 import Input from "./components/input";
@@ -28,7 +28,7 @@ function App() {
                   <Route path="/" element={<Predictions />} />
                   <Route path="/FirstTower" element={<FirstTower />} />
                   <Route path="/FirstDragon" element={<FirstDragon />} />
-                  <Route path="/FirstBaron" element={<FirstBaron />} />
+                  <Route path="/PlayerStats" element={<PlayerStats />} />
                   <Route path="/Winner" element={<WinPage />} />
                 </Routes>
               </div>

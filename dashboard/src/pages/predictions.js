@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import FeatureImportance from "../components/featureImportance";
 import { ResponseContext } from "../components/ResponseContext";
 import { ClickContext } from "../components/ClickContext";
+import SolidGaugeChart from "../components/gaugeChart";
 
 const Predictions = () => {
   const winTeam = "Winning Team Feature Importance";
@@ -18,14 +19,6 @@ const Predictions = () => {
   const [firstTowerPrediction, SetFirstTowerPrediction] = useState("");
   const [winPrediction, SetWinPrediction] = useState("");
   const [top, setTop] = useState(10);
-
-  const blueTeamStyle = {
-    color: "blue",
-  };
-
-  const redTeamStyle = {
-    color: "red",
-  };
 
   const handleChange = (event) => {
     setTop(parseInt(event.target.value, 10));
@@ -145,25 +138,34 @@ const Predictions = () => {
           </div>
         </div>
       )}
-      {importance.length > 0 && (
-        <div>
-          <FeatureImportance title={chartTitle} importance_data={importance} />
-        </div>
-      )}
-      {importance.length > 0 && (
-        <div>
-          <select
-            onChange={handleChange}
-            class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-          >
-            <option selected value="10">
-              Get Top 10 Features
-            </option>
-            <option value="15">Get Top 15 Features</option>
-            <option value="20">Get Top 20 Features</option>
-          </select>
-        </div>
-      )}
+      <div class="flex flex-nowrap justify-center">
+        {importance.length > 0 && (
+          <div>
+            <FeatureImportance
+              title={chartTitle}
+              importance_data={importance}
+            />
+            <div className="flex justify-center mt-5">
+              <span class="text-sm text-gray-400">Min (1)</span>
+              <input
+                id="labels-range-input"
+                type="range"
+                value={top}
+                min="1"
+                max="20"
+                className="w-full h-2 rounded-lg appearance-none cursor-pointer bg-gray-700"
+                onChange={handleChange}
+              />
+              <span class="text-sm text-gray-400">Max (20)</span>
+            </div>
+          </div>
+        )}
+        {importance.length > 0 && (
+          <div>
+            <SolidGaugeChart></SolidGaugeChart>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
