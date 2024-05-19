@@ -182,7 +182,6 @@ def make_models():
 
     # Train and evaluate models for each prediction target
     for target, features in prediction_targets.items():
-        train_and_evaluate_model(target, features, first=(target != 'result'))
-
+        train_and_evaluate_model(target, features,first=(target != 'result'))
 
 make_models()

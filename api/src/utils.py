@@ -122,24 +122,28 @@ def calculate_player_stats(player_name, champion):
     
     
     kills = player_data['kills'].mean()
+    assists = kills = player_data['assists'].mean()
     deaths = player_data['deaths'].replace(0, 1).mean()
-    kda = round(kills / deaths, 2)
+    kda = round( (kills + assists) / deaths, 2)
 
     kills10 = player_data['killsat10'].mean()
+    assists10 = kills = player_data['assists10at10'].mean()
     deaths10 = player_data['deathsat10'].replace(0, 1).mean()
-    kda10 = round(kills10 / deaths10, 2)
+    kda10 = round((kills10 + assists10) / deaths10, 2)
 
     kills15 = player_data['killsat15'].mean()
+    assists15 = kills = player_data['assistsat15'].mean()
     deaths15 = player_data['deathsat15'].replace(0, 1).mean()
-    kda15 = round(kills15 / deaths15, 2)
+    kda15 = round((kills15 + assists15) / deaths15, 2)
 
     golddiffat10 = round(player_data['golddiffat10'].mean(), 2)
     golddiffat15 = round(player_data['golddiffat15'].mean(), 2)
+    earned_gpm = round(player_data['earned gpm'].mean(), 2)
 
     wr = round(player_data['result'].mean() * 100, 2)
     gp = player_data.shape[0]
 
-    return kda, kda15, kda10, golddiffat10, golddiffat15, wr, gp
+    return kda, kda15, kda10, golddiffat10, golddiffat15, wr, gp, earned_gpm
 
 
 def get_predictions(team1Players,team1Champs, team2Players, team2Champs, prediction_target):
@@ -178,7 +182,7 @@ def get_predictions(team1Players,team1Champs, team2Players, team2Champs, predict
         champs.append(team2Champs[i])
     
     for i in range(len(players)):
-        kda, kda15, kda10, golddiffat10, golddiffat15, wr, gp = calculate_player_stats(players[i], champs[i])
+        kda, kda15, kda10, golddiffat10, golddiffat15, wr, gp, earned_gpm = calculate_player_stats(players[i], champs[i])
         input_data[f"{newsides[i]}{newroles[i]}gp"] = gp
         input_data[f"{newsides[i]}{newroles[i]}wr"] = wr
         if prediction_target == 'result':

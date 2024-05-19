@@ -8,10 +8,12 @@ from src.utils import get_column_values_from_csv, get_players, calculate_player_
 #print(counter_pick("Sion","Gwen"))
 #print(calculate_player_stats(player_name="Faker",champion="Ahri"))
 
-team1Players = ["Sniper","River","Quid","Meech","Eyla"]
-team1Champs = ["Riven","Vi","Yone","Seraphine","Karma"]
-team2Players = ["fNb","Aegis","Grevthar","Brance","JoJo"]
-team2Champs = ["K'Sante","Jax","Neeko","Aphelios","Nautilus"]
+team2Players = ["Zeus","Oner","Faker","Gumayusi","Keria"]
+team2Champs = ["K'Sante","Viego","Taliyah","Varus","Nautilius"]
+team1Players = ["Bin","Xun","knight","Elk","ON"]
+team1Champs = ["Camille","Xin Zhao","Neeko","Senna","Orn"]
 
 print(get_predictions(team1Players=team1Players,team1Champs=team1Champs,team2Players=team2Players,team2Champs=team2Champs,prediction_target="result"))
-print(load_feature_importance("firstbaron"))
+print(get_predictions(team1Players=team1Players,team1Champs=team1Champs,team2Players=team2Players,team2Champs=team2Champs,prediction_target="firsttower"))
+print(get_predictions(team1Players=team1Players,team1Champs=team1Champs,team2Players=team2Players,team2Champs=team2Champs,prediction_target="firstbaron"))
+

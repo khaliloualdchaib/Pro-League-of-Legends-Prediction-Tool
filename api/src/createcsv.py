@@ -39,8 +39,9 @@ def calculate_player_statistics(gameid,role,side,df):
     gp = name_champ.shape[0]
     wr = round(name_champ['result'].mean(),2)
     kills = name_champ['kills'].mean()
+    assists = name_champ['assists'].mean()
     deaths = name_champ['deaths'].replace(0, 1).mean()
-    kda = round(kills/deaths,2)
+    kda = round((kills + assists)/deaths,2)
 
     return gp,wr,kda
 
@@ -55,14 +56,16 @@ def csv_players_statiscs(df):
     Returns:
     None
     """
-    new_df = pd.DataFrame()
-    new_df['gameid'] = df.drop_duplicates(subset='gameid')['gameid']
+    
+
+    no_dups = pd.DataFrame()
+    no_dups['gameid'] = df.drop_duplicates(subset='gameid')['gameid']
 
     roles = ['top','jng','mid','bot','sup']
     sides = ['Blue','Red']
 
-
-    for gameid in tqdm(new_df['gameid']):
+    new_df = pd.DataFrame()
+    for gameid in tqdm(no_dups['gameid']):
         game_data = {'gameid': gameid}
         
         for role in roles:
@@ -108,13 +111,15 @@ def calculate_player_statistics_first(gameid,role,side,df):
     golddiffat10 = round(name_champ['golddiffat10'].mean(),2)
     golddiffat15 = round(name_champ['golddiffat15'].mean(),2)
 
-    killsat15 = name_champ['kills'].mean()
-    deathsat15 = name_champ['deaths'].replace(0, 1).mean()
-    kda15 = round(killsat15/deathsat15,2)
+    killsat15 = name_champ['killsat15'].mean()
+    assistsat15 = name_champ['assistsat15'].mean()
+    deathsat15 = name_champ['deathsat15'].replace(0, 1).mean()
+    kda15 = round((killsat15 + assistsat15)/deathsat15,2)
 
     killsat10 = name_champ['killsat10'].mean()
+    assistsat10 = name_champ['assistssat10'].mean()
     deathsat10 = name_champ['deathsat10'].replace(0, 1).mean()
-    kda10 = round(killsat10/deathsat10,2)
+    kda10 = round((killsat10 + assistsat10)/deathsat10,2)
 
     return gp,wr,kda10,kda15,golddiffat10,golddiffat15
 
@@ -129,12 +134,14 @@ def players_statiscs_first(df):
     Returns:
     None
     """
-    new_df = pd.DataFrame(df['gameid'].drop_duplicates().reset_index(drop=True), columns=['gameid'])
-    
-    roles = ['top', 'jng', 'mid', 'bot', 'sup']
-    sides = ['Blue', 'Red']
-    
-    for gameid in tqdm(new_df['gameid'], desc="Processing games"):
+    no_dups = pd.DataFrame()
+    no_dups['gameid'] = df.drop_duplicates(subset='gameid')['gameid']
+
+    roles = ['top','jng','mid','bot','sup']
+    sides = ['Blue','Red']
+
+    new_df = pd.DataFrame()
+    for gameid in tqdm(no_dups['gameid']):
         game_data = {'gameid': gameid}
         
         for role in roles:
@@ -183,6 +190,6 @@ file_path = f'csv\{2024}_LoL_esports_match_data_from_OraclesElixir(1).csv'
 df = pd.read_csv(file_path)
 
 #players_and_teams(df)
-#csv_players_statiscs(df)
+csv_players_statiscs(df)
 #players_statiscs_first(df)
 
