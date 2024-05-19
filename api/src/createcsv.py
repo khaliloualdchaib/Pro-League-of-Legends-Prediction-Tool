@@ -8,7 +8,7 @@ def players_and_teams(df):
     teams_data = df[df['position'] == 'team']
 
     # Create a new DataFrame with only selected columns
-    players_columns  = ['gameid', 'side', 'position', 'playername', 'playerid', 'teamname', 'teamid', 'champion', 'result', 'kills', 'deaths', 'killsat10', 'deathsat10','killsat15', 'deathsat15', 'assists', 'firstblood', 'firstbloodkill', 'firstbloodvictim','golddiffat10', "golddiffat15",]
+    players_columns  = ['gameid', 'side', 'position', 'playername', 'playerid', 'teamname', 'teamid', 'champion', 'result', 'kills', 'deaths', 'killsat10', 'deathsat10','killsat15', 'deathsat15', 'assists', 'firstblood', 'firstbloodkill', 'firstbloodvictim','golddiffat10', "golddiffat15",'earned gpm']
     teams_columns  = ['gameid', 'side', 'teamname', 'teamid', 'result', 'firstblood','team kpm', 'firstdragon', 'firstherald', 'firstbaron', 'firsttower' ]
 
     # Create DataFrames for players and teams
@@ -117,7 +117,7 @@ def calculate_player_statistics_first(gameid,role,side,df):
     kda15 = round((killsat15 + assistsat15)/deathsat15,2)
 
     killsat10 = name_champ['killsat10'].mean()
-    assistsat10 = name_champ['assistssat10'].mean()
+    assistsat10 = name_champ['assistsat10'].mean()
     deathsat10 = name_champ['deathsat10'].replace(0, 1).mean()
     kda10 = round((killsat10 + assistsat10)/deathsat10,2)
 
@@ -189,7 +189,7 @@ file_path = f'csv\{2024}_LoL_esports_match_data_from_OraclesElixir(1).csv'
 # Read the CSV file into a pandas DataFrame
 df = pd.read_csv(file_path)
 
-#players_and_teams(df)
-csv_players_statiscs(df)
+players_and_teams(df)
+#csv_players_statiscs(df)
 #players_statiscs_first(df)
 

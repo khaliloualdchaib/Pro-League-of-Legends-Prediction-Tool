@@ -1,242 +1,242 @@
 [
     {
-        "Feature": "Redsupwr",
-        "Importance": 0.05771399950179964
-    },
-    {
-        "Feature": "Bluejngwr",
-        "Importance": 0.053390303064538056
+        "Feature": "Redmidwr",
+        "Importance": 0.05427869169486163
     },
     {
         "Feature": "Bluesupwr",
-        "Importance": 0.04676584332253882
+        "Importance": 0.05311505620678683
     },
     {
-        "Feature": "Bluetopwr",
-        "Importance": 0.04458237293456702
+        "Feature": "Redsupwr",
+        "Importance": 0.05091471640674171
+    },
+    {
+        "Feature": "Bluejngwr",
+        "Importance": 0.049260073801486365
     },
     {
         "Feature": "Bluemidwr",
-        "Importance": 0.04242533684791718
+        "Importance": 0.04496247066585227
     },
     {
-        "Feature": "Redmidwr",
-        "Importance": 0.03708752030103057
+        "Feature": "Bluetopwr",
+        "Importance": 0.04328169433827295
     },
     {
         "Feature": "Redbotwr",
-        "Importance": 0.03493255486784355
-    },
-    {
-        "Feature": "Redjngwr",
-        "Importance": 0.03489397222863167
+        "Importance": 0.03649917066103676
     },
     {
         "Feature": "Bluebotwr",
-        "Importance": 0.031647054739156445
+        "Importance": 0.03529671111041883
+    },
+    {
+        "Feature": "Redjngwr",
+        "Importance": 0.03413384757468415
     },
     {
         "Feature": "Redtopwr",
-        "Importance": 0.027316282139849338
-    },
-    {
-        "Feature": "Bluebotkda15",
-        "Importance": 0.024390874651956915
-    },
-    {
-        "Feature": "Bluetopkda15",
-        "Importance": 0.02038889414646264
-    },
-    {
-        "Feature": "Bluemidkda15",
-        "Importance": 0.019961992110873367
-    },
-    {
-        "Feature": "Redbotkda15",
-        "Importance": 0.019784454381427796
-    },
-    {
-        "Feature": "Redmidkda15",
-        "Importance": 0.018258269967319593
-    },
-    {
-        "Feature": "Redjngkda15",
-        "Importance": 0.01809236014753888
-    },
-    {
-        "Feature": "Redtopkda15",
-        "Importance": 0.015396114097289346
+        "Importance": 0.03043211652633527
     },
     {
         "Feature": "Bluemidgolddiffat15",
-        "Importance": 0.015370599695453497
+        "Importance": 0.021061344275141034
     },
     {
         "Feature": "Bluebotgolddiffat15",
-        "Importance": 0.015269161598361327
+        "Importance": 0.01722440156263898
     },
     {
         "Feature": "Redmidgolddiffat15",
-        "Importance": 0.01490118003227492
-    },
-    {
-        "Feature": "Redtopgolddiffat10",
-        "Importance": 0.014674899925524908
-    },
-    {
-        "Feature": "Redsupkda15",
-        "Importance": 0.01457037462787858
-    },
-    {
-        "Feature": "Bluejngkda15",
-        "Importance": 0.014325802052282384
-    },
-    {
-        "Feature": "Bluebotgolddiffat10",
-        "Importance": 0.013971302659267404
-    },
-    {
-        "Feature": "Redjnggolddiffat15",
-        "Importance": 0.013953225940417278
-    },
-    {
-        "Feature": "Bluetopgolddiffat15",
-        "Importance": 0.013870472341252249
+        "Importance": 0.016947294556821018
     },
     {
         "Feature": "Redtopgolddiffat15",
-        "Importance": 0.01379256060124799
+        "Importance": 0.016633508646967093
     },
     {
         "Feature": "Redbotgolddiffat15",
-        "Importance": 0.013671127697619806
+        "Importance": 0.014938126594026113
     },
     {
-        "Feature": "Bluemidgolddiffat10",
-        "Importance": 0.013562729112383645
-    },
-    {
-        "Feature": "Bluetopgolddiffat10",
-        "Importance": 0.013358888106144527
-    },
-    {
-        "Feature": "Bluesupgolddiffat10",
-        "Importance": 0.012978190829923473
-    },
-    {
-        "Feature": "Redjnggolddiffat10",
-        "Importance": 0.012921286997911672
-    },
-    {
-        "Feature": "Redsupgolddiffat15",
-        "Importance": 0.012769247254830614
-    },
-    {
-        "Feature": "Bluesupgolddiffat15",
-        "Importance": 0.012727549275573492
-    },
-    {
-        "Feature": "Bluejnggolddiffat15",
-        "Importance": 0.012527115365651938
-    },
-    {
-        "Feature": "Redbotgolddiffat10",
-        "Importance": 0.012142070833811879
+        "Feature": "Bluetopgolddiffat15",
+        "Importance": 0.014730804411143559
     },
     {
         "Feature": "Redsupgolddiffat10",
-        "Importance": 0.01203416874626119
+        "Importance": 0.01460982069545362
+    },
+    {
+        "Feature": "Bluetopgolddiffat10",
+        "Importance": 0.01454060949818064
+    },
+    {
+        "Feature": "Bluebotgolddiffat10",
+        "Importance": 0.014522414346700766
+    },
+    {
+        "Feature": "Redtopgolddiffat10",
+        "Importance": 0.014090936368049664
+    },
+    {
+        "Feature": "Redjnggolddiffat10",
+        "Importance": 0.0137601391003681
+    },
+    {
+        "Feature": "Bluejnggolddiffat15",
+        "Importance": 0.013709762733804679
+    },
+    {
+        "Feature": "Bluesupgolddiffat15",
+        "Importance": 0.013562214058411218
     },
     {
         "Feature": "Redmidgolddiffat10",
-        "Importance": 0.0119478737957822
+        "Importance": 0.013345431248599646
+    },
+    {
+        "Feature": "Redjnggolddiffat15",
+        "Importance": 0.013129264977971119
+    },
+    {
+        "Feature": "Bluesupgolddiffat10",
+        "Importance": 0.012996414434877741
+    },
+    {
+        "Feature": "Redsupgolddiffat15",
+        "Importance": 0.012826514444896799
+    },
+    {
+        "Feature": "Redbotgolddiffat10",
+        "Importance": 0.012821375426996585
+    },
+    {
+        "Feature": "Bluemidgolddiffat10",
+        "Importance": 0.012801707374211865
     },
     {
         "Feature": "Bluejnggolddiffat10",
-        "Importance": 0.011793586048548752
+        "Importance": 0.01271892253945131
+    },
+    {
+        "Feature": "Redmidkda15",
+        "Importance": 0.012162041928411456
     },
     {
         "Feature": "Bluesupkda15",
-        "Importance": 0.010800549089012339
+        "Importance": 0.012045585161948735
     },
     {
-        "Feature": "Bluebotkda10",
-        "Importance": 0.008255663103906562
+        "Feature": "Bluetopkda15",
+        "Importance": 0.011938704417729524
     },
     {
-        "Feature": "Bluetopgp",
-        "Importance": 0.008231100769476222
+        "Feature": "Bluemidkda15",
+        "Importance": 0.011505515462272834
     },
     {
-        "Feature": "Redbotkda10",
-        "Importance": 0.008189975143291721
+        "Feature": "Bluejngkda15",
+        "Importance": 0.011367916077343375
     },
     {
-        "Feature": "Redtopgp",
-        "Importance": 0.00810509299453921
+        "Feature": "Redjngkda15",
+        "Importance": 0.011130674786917318
     },
     {
-        "Feature": "Bluesupgp",
-        "Importance": 0.007988998141789164
+        "Feature": "Redsupkda15",
+        "Importance": 0.01087910526842123
+    },
+    {
+        "Feature": "Bluebotkda15",
+        "Importance": 0.01085359004159277
     },
     {
         "Feature": "Bluejngkda10",
-        "Importance": 0.007903795908232127
-    },
-    {
-        "Feature": "Redjngkda10",
-        "Importance": 0.00783908677984868
+        "Importance": 0.010811792839967494
     },
     {
         "Feature": "Redbotgp",
-        "Importance": 0.007674365379447509
+        "Importance": 0.010111113087070413
     },
     {
-        "Feature": "Bluejnggp",
-        "Importance": 0.007630105055782322
+        "Feature": "Redjngkda10",
+        "Importance": 0.010036495548665234
+    },
+    {
+        "Feature": "Bluebotkda10",
+        "Importance": 0.009933057654822367
     },
     {
         "Feature": "Bluetopkda10",
-        "Importance": 0.0073934590585980516
-    },
-    {
-        "Feature": "Redjnggp",
-        "Importance": 0.007249954778216735
-    },
-    {
-        "Feature": "Redmidgp",
-        "Importance": 0.007171367851946019
-    },
-    {
-        "Feature": "Bluemidgp",
-        "Importance": 0.007158626052964638
-    },
-    {
-        "Feature": "Bluebotgp",
-        "Importance": 0.007094549712675029
-    },
-    {
-        "Feature": "Redsupgp",
-        "Importance": 0.006951168993214087
-    },
-    {
-        "Feature": "Bluesupkda10",
-        "Importance": 0.006617939014947493
-    },
-    {
-        "Feature": "Redmidkda10",
-        "Importance": 0.006408665185226433
-    },
-    {
-        "Feature": "Bluemidkda10",
-        "Importance": 0.005779678990582837
-    },
-    {
-        "Feature": "Redtopkda10",
-        "Importance": 0.005757463864111994
+        "Importance": 0.009398712954660153
     },
     {
         "Feature": "Redsupkda10",
-        "Importance": 0.005636781143046312
+        "Importance": 0.00924787511938393
+    },
+    {
+        "Feature": "Bluesupkda10",
+        "Importance": 0.009195107363371341
+    },
+    {
+        "Feature": "Redtopkda15",
+        "Importance": 0.00866952789662469
+    },
+    {
+        "Feature": "Redbotkda15",
+        "Importance": 0.008582077964940881
+    },
+    {
+        "Feature": "Bluebotgp",
+        "Importance": 0.008581988461112338
+    },
+    {
+        "Feature": "Redbotkda10",
+        "Importance": 0.008108827835173058
+    },
+    {
+        "Feature": "Bluesupgp",
+        "Importance": 0.008084982438568169
+    },
+    {
+        "Feature": "Redmidkda10",
+        "Importance": 0.007881096663396092
+    },
+    {
+        "Feature": "Bluetopgp",
+        "Importance": 0.007839034684927295
+    },
+    {
+        "Feature": "Redmidgp",
+        "Importance": 0.007793798431568577
+    },
+    {
+        "Feature": "Bluemidkda10",
+        "Importance": 0.007774200531520155
+    },
+    {
+        "Feature": "Bluemidgp",
+        "Importance": 0.007637347731099999
+    },
+    {
+        "Feature": "Bluejnggp",
+        "Importance": 0.007404628744975234
+    },
+    {
+        "Feature": "Redsupgp",
+        "Importance": 0.0071825822059585626
+    },
+    {
+        "Feature": "Redtopgp",
+        "Importance": 0.007023282971042789
+    },
+    {
+        "Feature": "Redtopkda10",
+        "Importance": 0.00684619618583187
+    },
+    {
+        "Feature": "Redjnggp",
+        "Importance": 0.006827583259493978
     }
 ]
