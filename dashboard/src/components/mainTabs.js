@@ -6,12 +6,12 @@ const MainTabs = () => {
   return (
     <div class="text-sm font-medium text-center border-b text-gray-400 border-gray-700">
       <ul class="flex flex-wrap -mb-px">
-        <li class="me-2">
+      <li class="me-2">
           <Link
-            to="/FirstBlood"
-            class={location.pathname === "/FirstBlood" || location.pathname === "/" ? activeTab : normalTab}
+            to="/"
+            class={location.pathname === "/" ? activeTab : normalTab}
           >
-            First Blood
+            Predictions
           </Link>
         </li>
         <li class="me-2">
@@ -19,7 +19,7 @@ const MainTabs = () => {
             to="/FirstTower"
             class={location.pathname === "/FirstTower" ? activeTab : normalTab}
           >
-            First Tower
+            Win rate
           </Link>
         </li>
         <li class="me-2">
@@ -27,7 +27,7 @@ const MainTabs = () => {
             to="/FirstDragon"
             class={location.pathname === "/FirstDragon" ? activeTab : normalTab}
           >
-            First Dragon
+            Gold Difference
           </Link>
         </li>
         <li class="me-2">
@@ -35,31 +35,15 @@ const MainTabs = () => {
             to="/FirstBaron"
             class={location.pathname === "/FirstBaron" ? activeTab : normalTab}
           >
-            First Baron
+            KDA
           </Link>
         </li>
         <li class="me-2">
           <Link
-            to="/FirstInhibitor"
-            class={location.pathname === "/FirstInhibitor" ? activeTab : normalTab}
+            to="/PlayerStats"
+            class={location.pathname === "/PlayerStats" ? activeTab : normalTab}
           >
-            First Inhibitor
-          </Link>
-        </li>
-        <li class="me-2">
-          <Link
-            to="/MostKills"
-            class={location.pathname === "/MostKills" ? activeTab : normalTab}
-          >
-            Most Kills
-          </Link>
-        </li>
-        <li class="me-2">
-          <Link
-            to="/Winner"
-            class={location.pathname === "/Winner" ? activeTab : normalTab}
-          >
-            Winner
+            Player Stats
           </Link>
         </li>
       </ul>
