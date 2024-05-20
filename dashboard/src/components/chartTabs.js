@@ -15,7 +15,7 @@ const ChartTabs = ({ tabs, onChange }) => {
   };
 
   return (
-    <ul className="flex flex-wrap text-sm font-medium text-center text-gray-400">
+    <ul className="flex flex-wrap justify-center text-sm font-medium text-center text-gray-400">
       {tabs.map((tab) => (
         <li className="me-2" key={tab}>
           <button
