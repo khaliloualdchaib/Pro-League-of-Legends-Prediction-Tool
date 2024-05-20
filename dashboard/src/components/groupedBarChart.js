@@ -18,7 +18,7 @@ const GroupedBarChart = ({ team1Data, team2Data, metric }) => {
     },
     yAxis: {
       title: {
-        text: "GPM" === metric ? "Average Gold/Min" : metric,
+        text: "GPM" === metric ? "Gold/Min" : metric,
       },
     },
     series: [

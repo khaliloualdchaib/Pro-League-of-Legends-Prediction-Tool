@@ -45,7 +45,7 @@ class MainEndpoint(Resource):
             }
         }
         for team in playerStats:
-            for role in playerStats:
+            for role in playerStats[team]:
                 if team == "Team1":
                     kda, kda15, kda10, golddiffat10, golddiffat15, wr, gp, earned_gpm, kills, assists, deaths = calculate_player_stats(team1Players[role], team1Champs[role])                   
                 else:
@@ -56,12 +56,12 @@ class MainEndpoint(Resource):
                     "kda10": kda10, 
                     "golddiffat10": golddiffat10, 
                     "golddiffat15": golddiffat15, 
-                    "wr": wr, 
-                    "gp": gp, 
-                    "gpm": earned_gpm, 
-                    "kills": kills, 
-                    "assists": assists, 
-                    "deaths": deaths
+                    "Winrate": wr, 
+                    "PlayedGames": gp, 
+                    "GPM": earned_gpm, 
+                    "Kills": kills, 
+                    "Assists": assists, 
+                    "Deaths": deaths
                 }
         return playerStats           
 

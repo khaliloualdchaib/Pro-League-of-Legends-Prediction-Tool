@@ -118,7 +118,7 @@ def calculate_player_stats(player_name, champion):
 
     if player_data.empty:
         
-        return 0, 0, 0, 0, 0, 0, 0
+        return 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     
     
     kills = player_data['kills'].mean()
@@ -127,12 +127,12 @@ def calculate_player_stats(player_name, champion):
     kda = round( (kills + assists) / deaths, 2)
 
     kills10 = player_data['killsat10'].mean()
-    assists10 = kills = player_data['assists10at10'].mean()
+    assists10 = player_data['assistsat10'].mean()
     deaths10 = player_data['deathsat10'].replace(0, 1).mean()
     kda10 = round((kills10 + assists10) / deaths10, 2)
 
     kills15 = player_data['killsat15'].mean()
-    assists15 = kills = player_data['assistsat15'].mean()
+    assists15 = player_data['assistsat15'].mean()
     deaths15 = player_data['deathsat15'].replace(0, 1).mean()
     kda15 = round((kills15 + assists15) / deaths15, 2)
 

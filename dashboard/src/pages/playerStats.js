@@ -1,93 +1,9 @@
 import SpiderChart from "../components/spiderChart";
 import ChartTabs from "../components/chartTabs";
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import GroupedBarChart from "../components/groupedBarChart";
-const playerStats = {
-  Team1: {
-    Top: {
-      Kills: 10,
-      Assists: 5,
-      Deaths: 2,
-      GPM: 300,
-      PlayedGames: 20,
-      Winrate: 60,
-    },
-    Jungle: {
-      Kills: 8,
-      Assists: 7,
-      Deaths: 3,
-      GPM: 250,
-      PlayedGames: 25,
-      Winrate: 55,
-    },
-    Mid: {
-      Kills: 15,
-      Assists: 10,
-      Deaths: 5,
-      GPM: 400,
-      PlayedGames: 30,
-      Winrate: 70,
-    },
-    Bottom: {
-      Kills: 12,
-      Assists: 8,
-      Deaths: 4,
-      GPM: 350,
-      PlayedGames: 28,
-      Winrate: 65,
-    },
-    Support: {
-      Kills: 5,
-      Assists: 15,
-      Deaths: 6,
-      GPM: 200,
-      PlayedGames: 22,
-      Winrate: 58,
-    },
-  },
-  Team2: {
-    Top: {
-      Kills: 11,
-      Assists: 6,
-      Deaths: 3,
-      GPM: 310,
-      PlayedGames: 21,
-      Winrate: 62,
-    },
-    Jungle: {
-      Kills: 9,
-      Assists: 8,
-      Deaths: 4,
-      GPM: 260,
-      PlayedGames: 26,
-      Winrate: 57,
-    },
-    Mid: {
-      Kills: 14,
-      Assists: 9,
-      Deaths: 5,
-      GPM: 390,
-      PlayedGames: 29,
-      Winrate: 68,
-    },
-    Bottom: {
-      Kills: 13,
-      Assists: 7,
-      Deaths: 5,
-      GPM: 360,
-      PlayedGames: 27,
-      Winrate: 66,
-    },
-    Support: {
-      Kills: 6,
-      Assists: 14,
-      Deaths: 7,
-      GPM: 210,
-      PlayedGames: 23,
-      Winrate: 60,
-    },
-  },
-};
+import { ResponseContext } from "../components/ResponseContext";
+import { ClickContext } from "../components/ClickContext";
 
 const maxData = (data) => {
   let maxKills = 0;
@@ -161,42 +77,65 @@ const getBarData = (data) => {
 };
 
 const PlayerStats = () => {
-  const max = maxData(playerStats);
-  const team1Data = prepareData(max, playerStats.Team1);
-  const team2Data = prepareData(max, playerStats.Team2);
   const roles = ["Top", "Jungle", "Mid", "Bottom", "Support"];
   const stats = ["Kills", "Assists", "Deaths", "PlayedGames", "Winrate", "GPM"];
 
   const [selectedRole, setSelectedRole] = useState("Top");
   const [selectedStat, setSelectedStat] = useState("Kills");
+  const [team1SpiderData, setTeam1SpiderData] = useState({});
+  const [team2SpiderData, setTeam2SpiderData] = useState({});
+  const [team1BarData, setTeam1BarData] = useState({});
+  const [team2BarData, setTeam2BarData] = useState({});
+  const { responseData } = useContext(ResponseContext);
+  const { isClicked } = useContext(ClickContext);
 
-  const barData1 = getBarData(playerStats.Team1);
-  const barData2 = getBarData(playerStats.Team2);
+  useEffect(() => {
+    const init = () => {
+      if (isClicked && responseData) {
+        console.log(responseData)
+        const playerStats = responseData.playerStats;
+        const max = maxData(playerStats);
+        const team1Data = prepareData(max, playerStats.Team1);
+        const team2Data = prepareData(max, playerStats.Team2);
+        const barData1 = getBarData(playerStats.Team1);
+        const barData2 = getBarData(playerStats.Team2);
+        setTeam1SpiderData(team1Data);
+        setTeam2SpiderData(team2Data);
+        setTeam1BarData(barData1);
+        setTeam2BarData(barData2);
+      }
+    };
+    init();
+  }, [isClicked, responseData]);
   return (
-    <div class="flex flex-row">
-      <div className="basis-1/2">
-        <div className="flex flex-col">
-          <ChartTabs tabs={roles} onChange={setSelectedRole} />
-          <SpiderChart
-            player1Data={team1Data[selectedRole].normal}
-            player2Data={team2Data[selectedRole].normal}
-            normalizedPlayer1Data={team1Data[selectedRole].normalized}
-            normalizedPlayer2Data={team2Data[selectedRole].normalized}
-            currentRole={selectedRole}
-          />
+    <>
+      {Object.keys(team1SpiderData).length > 0 && (
+        <div class="flex flex-row">
+          <div className="basis-1/2">
+            <div className="flex flex-col">
+              <ChartTabs tabs={roles} onChange={setSelectedRole} />
+              <SpiderChart
+                player1Data={team1SpiderData[selectedRole].normal}
+                player2Data={team2SpiderData[selectedRole].normal}
+                normalizedPlayer1Data={team1SpiderData[selectedRole].normalized}
+                normalizedPlayer2Data={team2SpiderData[selectedRole].normalized}
+                currentRole={selectedRole}
+              />
+            </div>
+          </div>
+          <div className="basis-1/2">
+            <div className="flex flex-col">
+              <ChartTabs tabs={stats} onChange={setSelectedStat}></ChartTabs>
+              <GroupedBarChart
+                team1Data={team1BarData[selectedStat]}
+                team2Data={team2BarData[selectedStat]}
+                metric={selectedStat}
+              ></GroupedBarChart>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="basis-1/2">
-        <div className="flex flex-col">
-          <ChartTabs tabs={stats} onChange={setSelectedStat}></ChartTabs>
-          <GroupedBarChart
-            team1Data={barData1[selectedStat]}
-            team2Data={barData2[selectedStat]}
-            metric={selectedStat}
-          ></GroupedBarChart>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
