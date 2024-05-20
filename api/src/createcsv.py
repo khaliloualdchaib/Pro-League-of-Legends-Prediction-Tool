@@ -8,7 +8,7 @@ def players_and_teams(df):
     teams_data = df[df['position'] == 'team']
 
     # Create a new DataFrame with only selected columns
-    players_columns  = ['gameid', 'side', 'position', 'playername', 'playerid', 'teamname', 'teamid', 'champion', 'result', 'kills', 'deaths', 'killsat10', 'deathsat10','killsat15', 'deathsat15', 'assists', 'firstblood', 'firstbloodkill', 'firstbloodvictim','golddiffat10', "golddiffat15",'earned gpm']
+    players_columns  = ['gameid', 'side', 'position', 'playername', 'playerid', 'teamname', 'teamid', 'champion', 'result', 'kills', 'deaths', 'killsat10', 'deathsat10','killsat15', 'deathsat15', 'assists', 'assistsat15', 'assistsat10', 'firstblood', 'firstbloodkill', 'firstbloodvictim','golddiffat10', "golddiffat15",'earned gpm']
     teams_columns  = ['gameid', 'side', 'teamname', 'teamid', 'result', 'firstblood','team kpm', 'firstdragon', 'firstherald', 'firstbaron', 'firsttower' ]
 
     # Create DataFrames for players and teams

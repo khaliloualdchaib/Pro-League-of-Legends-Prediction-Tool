@@ -118,7 +118,7 @@ def calculate_player_stats(player_name, champion):
 
     if player_data.empty:
         
-        return 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        return 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     
     
     kills = player_data['kills'].mean()
@@ -182,7 +182,7 @@ def get_predictions(team1Players,team1Champs, team2Players, team2Champs, predict
         champs.append(team2Champs[i])
     
     for i in range(len(players)):
-        kda, kda15, kda10, golddiffat10, golddiffat15, wr, gp, _, _, _  = calculate_player_stats(players[i], champs[i])
+        kda, kda15, kda10, golddiffat10, golddiffat15, wr, gp, _, _, _ , _ = calculate_player_stats(players[i], champs[i])
         input_data[f"{newsides[i]}{newroles[i]}gp"] = gp
         input_data[f"{newsides[i]}{newroles[i]}wr"] = wr
         if prediction_target == 'result':
