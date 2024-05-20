@@ -27,8 +27,44 @@ class MainEndpoint(Resource):
         
         return predictions
     
-    def playerStats_page(self, team1Players, team1Champs, team2Players, team2Champs):
-        playerStats = {}
+    def getplayerStats(self, team1Players, team1Champs, team2Players, team2Champs):
+        playerStats = {
+            "Team1": {
+                "Top": {},
+                "Jungle":{},
+                "Mid":{},
+                "Bottom": {},
+                "Support": {}
+            },
+            "Team2": {
+                "Top": {},
+                "Jungle":{},
+                "Mid":{},
+                "Bottom": {},
+                "Support": {}
+            }
+        }
+        for team in playerStats:
+            for role in playerStats:
+                if team == "Team1":
+                    kda, kda15, kda10, golddiffat10, golddiffat15, wr, gp, earned_gpm, kills, assists, deaths = calculate_player_stats(team1Players[role], team1Champs[role])                   
+                else:
+                    kda, kda15, kda10, golddiffat10, golddiffat15, wr, gp, earned_gpm, kills, assists, deaths = calculate_player_stats(team2Players[role], team2Champs[role])
+                playerStats[team][role] = {
+                    "kda" : kda, 
+                    "kda15": kda15, 
+                    "kda10": kda10, 
+                    "golddiffat10": golddiffat10, 
+                    "golddiffat15": golddiffat15, 
+                    "wr": wr, 
+                    "gp": gp, 
+                    "gpm": earned_gpm, 
+                    "kills": kills, 
+                    "assists": assists, 
+                    "deaths": deaths
+                }
+        return playerStats           
+
         
     
     def get(self):
@@ -41,7 +77,8 @@ class MainEndpoint(Resource):
             
 
             responsejson = {
-                "predictions": self.prediction_page(team1Players, team1Champs, team2Players, team2Champs)
+                "predictions": self.prediction_page(team1Players, team1Champs, team2Players, team2Champs),
+                "playerStats": self.getplayerStats(team1Players, team1Champs, team2Players, team2Champs)
             } 
 
             return jsonify(responsejson)

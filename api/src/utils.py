@@ -143,7 +143,7 @@ def calculate_player_stats(player_name, champion):
     wr = round(player_data['result'].mean() * 100, 2)
     gp = player_data.shape[0]
 
-    return kda, kda15, kda10, golddiffat10, golddiffat15, wr, gp, earned_gpm, kills, assists
+    return kda, kda15, kda10, golddiffat10, golddiffat15, wr, gp, earned_gpm, kills, assists, deaths
 
 
 def get_predictions(team1Players,team1Champs, team2Players, team2Champs, prediction_target):
