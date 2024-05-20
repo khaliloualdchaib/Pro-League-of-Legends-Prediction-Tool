@@ -68,21 +68,16 @@ class MainEndpoint(Resource):
         
     
     def get(self):
-        try:
-            team1Players = json.loads(request.args.get('team1Players'))
-            team1Champs = json.loads(request.args.get('team1Champs'))
-            team2Players = json.loads(request.args.get('team2Players'))
-            team2Champs = json.loads(request.args.get('team2Champs'))
+        team1Players = json.loads(request.args.get('team1Players'))
+        team1Champs = json.loads(request.args.get('team1Champs'))
+        team2Players = json.loads(request.args.get('team2Players'))
+        team2Champs = json.loads(request.args.get('team2Champs'))
 
-            
-
-            responsejson = {
-                "predictions": self.prediction_page(team1Players, team1Champs, team2Players, team2Champs),
-                "playerStats": self.getplayerStats(team1Players, team1Champs, team2Players, team2Champs)
-            } 
-
-            return jsonify(responsejson)
         
-        except Exception as e:
-            print("Error:", e)
-            return response_400()
+
+        responsejson = {
+            "predictions": self.prediction_page(team1Players, team1Champs, team2Players, team2Champs),
+            "playerStats": self.getplayerStats(team1Players, team1Champs, team2Players, team2Champs)
+        } 
+
+        return jsonify(responsejson)

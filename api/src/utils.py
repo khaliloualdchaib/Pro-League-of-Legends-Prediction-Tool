@@ -122,7 +122,7 @@ def calculate_player_stats(player_name, champion):
     
     
     kills = player_data['kills'].mean()
-    assists = kills = player_data['assists'].mean()
+    assists = player_data['assists'].mean()
     deaths = player_data['deaths'].replace(0, 1).mean()
     kda = round( (kills + assists) / deaths, 2)
 
@@ -196,7 +196,7 @@ def get_predictions(team1Players,team1Champs, team2Players, team2Champs, predict
     # Make predictions
     prediction = classifier.predict(input_data)
 
-    return prediction[0]  # Return raw prediction if not binary
+    return int(prediction[0])  # Return raw prediction if not binary
 
 
 def load_feature_importance(prediction_target):

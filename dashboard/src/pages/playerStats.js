@@ -92,13 +92,12 @@ const PlayerStats = () => {
   useEffect(() => {
     const init = () => {
       if (isClicked && responseData) {
-        console.log(responseData)
-        const playerStats = responseData.playerStats;
-        const max = maxData(playerStats);
-        const team1Data = prepareData(max, playerStats.Team1);
-        const team2Data = prepareData(max, playerStats.Team2);
-        const barData1 = getBarData(playerStats.Team1);
-        const barData2 = getBarData(playerStats.Team2);
+        const stats = responseData.playerStats;
+        const max = maxData(stats);
+        const team1Data = prepareData(max, stats.Team1);
+        const team2Data = prepareData(max, stats.Team2);
+        const barData1 = getBarData(stats.Team1);
+        const barData2 = getBarData(stats.Team2);
         setTeam1SpiderData(team1Data);
         setTeam2SpiderData(team2Data);
         setTeam1BarData(barData1);
