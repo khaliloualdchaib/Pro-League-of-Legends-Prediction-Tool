@@ -213,3 +213,46 @@ def load_feature_importance(prediction_target):
     with open(feature_importance_filename, 'r') as f:
         return json.load(f)
 
+def player_only_statistics(player_name):
+    """
+    Calculate player statistics including KDA at 10 and 15 minutes, gold difference at 10 and 15 minutes, and win rate.
+
+    Parameters:
+    player_name (str): Name of the player.
+    df (pd.DataFrame): DataFrame containing the game data.
+
+    Returns:
+    tuple: A tuple containing KDA at 10 minutes, KDA at 15 minutes, gold difference at 10 minutes,
+           gold difference at 15 minutes, and win rate.
+    """
+
+    csv_file = "src/csv/players.csv"
+
+    df = pd.read_csv(csv_file)
+
+    player_data = df[(df['playername'] == player_name)]
+    
+    
+    kills = player_data['kills']
+    assists = player_data['assists']
+    deaths = player_data['deaths'].replace(0, 1)
+    earned_gpm = player_data['earned gpm']
+    teamkills = player_data ['teamkills']
+
+
+    new_df = pd.DataFrame({
+        'kills': kills,
+        'assists': assists,
+        'deaths': deaths,
+        'earned gpm': earned_gpm,
+        'teamkills' : teamkills
+    })
+
+    # Convert DataFrame to list of dictionaries
+    json_list = new_df.to_dict(orient='records')
+
+    # Convert list of dictionaries to JSON string
+    json_obj = json.dumps(json_list, indent=4)
+
+    # Print the JSON object
+    return json_obj
