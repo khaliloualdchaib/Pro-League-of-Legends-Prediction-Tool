@@ -76,6 +76,10 @@ class MainEndpoint(Resource):
             matches["Team2"][role] = player_only_statistics(team2Players[role])
         return matches
                 
+    def check_empty_input(inp):
+        if inp["Top"] == "" or inp["Jungle"] == "" or inp["Mid"] == "" or inp["Bottom"] == "" or inp["Support"] == "":
+            return True
+        return False
     
     def get(self):
         team1Players = json.loads(request.args.get('team1Players'))
@@ -83,7 +87,8 @@ class MainEndpoint(Resource):
         team2Players = json.loads(request.args.get('team2Players'))
         team2Champs = json.loads(request.args.get('team2Champs'))
 
-        
+        if self.check_empty_input(team1Players) or self.check_empty_input(team1Champs) or self.check_empty_input(team2Players) or self.check_empty_input(team2Champs):
+            return jsonify({})
 
         responsejson = {
             "predictions": self.prediction_page(team1Players, team1Champs, team2Players, team2Champs),
