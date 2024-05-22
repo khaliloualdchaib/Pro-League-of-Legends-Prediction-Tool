@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from flask_restful import Resource
 import json
-from .utils import response_400, load_feature_importance, get_predictions, calculate_player_stats
+from .utils import response_400, load_feature_importance, get_predictions, calculate_player_stats, player_only_statistics
 class MainEndpoint(Resource):
     def route():
         return '/api/main'
@@ -63,9 +63,19 @@ class MainEndpoint(Resource):
                     "Assists": assists, 
                     "Deaths": deaths
                 }
-        return playerStats           
+        return playerStats
 
-        
+    def recentPage(self, team1Players, team2Players):
+        matches = {
+            "Team1": {},
+            "Team2": {}
+        }
+        for role in team1Players:
+            matches["Team1"][role] = player_only_statistics(team1Players[role])
+        for role in team2Players:
+            matches["Team2"][role] = player_only_statistics(team2Players[role])
+        return matches
+                
     
     def get(self):
         team1Players = json.loads(request.args.get('team1Players'))
@@ -77,7 +87,8 @@ class MainEndpoint(Resource):
 
         responsejson = {
             "predictions": self.prediction_page(team1Players, team1Champs, team2Players, team2Champs),
-            "playerStats": self.getplayerStats(team1Players, team1Champs, team2Players, team2Champs)
+            "playerStats": self.getplayerStats(team1Players, team1Champs, team2Players, team2Champs),
+            "recentGames": self.recentPage(team1Players, team1Players)
         } 
 
         return jsonify(responsejson)

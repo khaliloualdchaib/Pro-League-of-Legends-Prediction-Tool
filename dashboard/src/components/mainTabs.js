@@ -16,26 +16,10 @@ const MainTabs = () => {
         </li>
         <li class="me-2">
           <Link
-            to="/FirstTower"
-            class={location.pathname === "/FirstTower" ? activeTab : normalTab}
+            to="/RecentGames"
+            class={location.pathname === "/RecentGames" ? activeTab : normalTab}
           >
-            Win rate
-          </Link>
-        </li>
-        <li class="me-2">
-          <Link
-            to="/FirstDragon"
-            class={location.pathname === "/FirstDragon" ? activeTab : normalTab}
-          >
-            Gold Difference
-          </Link>
-        </li>
-        <li class="me-2">
-          <Link
-            to="/FirstBaron"
-            class={location.pathname === "/FirstBaron" ? activeTab : normalTab}
-          >
-            KDA
+            Recent Games
           </Link>
         </li>
         <li class="me-2">

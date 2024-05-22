@@ -15,34 +15,45 @@ const Predictions = () => {
   const { isClicked } = useContext(ClickContext);
 
   const [importance, setImportance] = useState([]);
-  const [firstBaronPrediction, SetFirstBaronPrediction] = useState("");
-  const [firstTowerPrediction, SetFirstTowerPrediction] = useState("");
-  const [winPrediction, SetWinPrediction] = useState("");
+  const [firstBaronPrediction, setFirstBaronPrediction] = useState("");
+  const [firstTowerPrediction, setFirstTowerPrediction] = useState("");
+  const [winPrediction, setWinPrediction] = useState("");
   const [top, setTop] = useState(10);
+  const [clickedLink, setClickedLink] = useState(winTeam); // State to track the clicked link
 
   const handleChange = (event) => {
-    setTop(parseInt(event.target.value, 10));
+    const newTop = parseInt(event.target.value, 10);
+    setTop(newTop);
+
+    // Update importance data based on the selected chart title
+    let data;
+    if (chartTitle === winTeam) {
+      data = responseData.predictions.importance["result"];
+    } else if (chartTitle === firstTower) {
+      data = responseData.predictions.importance["firsttower"];
+    } else if (chartTitle === firstBaron) {
+      data = responseData.predictions.importance["firstbaron"];
+    }
+    data.sort((a, b) => b.Importance - a.Importance);
+
+    const topFeatures = data.slice(0, newTop);
+    setImportance(topFeatures);
   };
 
   useEffect(() => {
     const init = () => {
       if (isClicked && responseData) {
         const predictions = responseData.predictions.classifications;
-        if (predictions["firstbaron"] === 1) {
-          SetFirstBaronPrediction("Blue Team");
-        } else {
-          SetFirstBaronPrediction("Red Team");
-        }
-        if (predictions["firsttower"] === 1) {
-          SetFirstTowerPrediction("Blue Team");
-        } else {
-          SetFirstTowerPrediction("Red Team");
-        }
-        if (predictions["result"] === 1) {
-          SetWinPrediction("Blue Team");
-        } else {
-          SetWinPrediction("Red Team");
-        }
+        setFirstBaronPrediction(
+          predictions["firstbaron"] === 1 ? "Blue Team" : "Red Team"
+        );
+        setFirstTowerPrediction(
+          predictions["firsttower"] === 1 ? "Blue Team" : "Red Team"
+        );
+        setWinPrediction(
+          predictions["result"] === 1 ? "Blue Team" : "Red Team"
+        );
+
         const data = responseData.predictions.importance["result"];
         data.sort((a, b) => b.Importance - a.Importance);
 
@@ -50,32 +61,43 @@ const Predictions = () => {
         setImportance(topFeatures);
       }
     };
-    init();
-  }, [isClicked, responseData, top]);
-
-  const handleSetChartTitle = (title) => () => {
-    if (responseData && isClicked) {
-      if (title === winTeam) {
-        const data = responseData.predictions.importance["result"];
-        data.sort((a, b) => b.Importance - a.Importance);
-
-        const topFeatures = data.slice(0, top);
-        setImportance(topFeatures);
-      } else if (title === firstTower) {
-        const data = responseData.predictions.importance["firsttower"];
-        data.sort((a, b) => b.Importance - a.Importance);
-
-        const topFeatures = data.slice(0, top);
-        setImportance(topFeatures);
-      } else if (title === firstBaron) {
-        const data = responseData.predictions.importance["firstbaron"];
+    const updateImportanceData = () => {
+      if (responseData && isClicked) {
+        let data;
+        if (chartTitle === winTeam) {
+          data = responseData.predictions.importance["result"];
+        } else if (chartTitle === firstTower) {
+          data = responseData.predictions.importance["firsttower"];
+        } else if (chartTitle === firstBaron) {
+          data = responseData.predictions.importance["firstbaron"];
+        }
         data.sort((a, b) => b.Importance - a.Importance);
 
         const topFeatures = data.slice(0, top);
         setImportance(topFeatures);
       }
+    };
+    init();
+    updateImportanceData()
+  }, [isClicked, responseData, top, chartTitle]);
+
+  const handleSetChartTitle = (title) => () => {
+    if (responseData && isClicked) {
+      let data;
+      if (title === winTeam) {
+        data = responseData.predictions.importance["result"];
+      } else if (title === firstTower) {
+        data = responseData.predictions.importance["firsttower"];
+      } else if (title === firstBaron) {
+        data = responseData.predictions.importance["firstbaron"];
+      }
+      data.sort((a, b) => b.Importance - a.Importance);
+
+      const topFeatures = data.slice(0, top);
+      setImportance(topFeatures);
+      setChartTitle(title);
+      setClickedLink(title); // Set the clicked link state
     }
-    setChartTitle(title);
   };
 
   return (
@@ -86,15 +108,16 @@ const Predictions = () => {
             <Link
               onClick={handleSetChartTitle(winTeam)}
               to="/"
-              className="block max-w-sm p-6 border rounded-lg shadow bg-gray-800 border-gray-700 hover:bg-gray-700"
+              className={`block max-w-sm p-6 border rounded-lg shadow ${
+                clickedLink === winTeam ? "bg-gray-700" : "bg-gray-800"
+              } border-gray-700 hover:bg-gray-700`}
             >
               <h5
-                className="mb-2 text-2xl font-bold tracking-tight text-white"
-                class={
+                className={`mb-2 text-2xl font-bold tracking-tight ${
                   winPrediction === "Blue Team"
                     ? "text-blue-500"
                     : "text-red-500"
-                }
+                }`}
               >
                 Winning Team: {winPrediction}
               </h5>
@@ -104,15 +127,16 @@ const Predictions = () => {
             <Link
               onClick={handleSetChartTitle(firstTower)}
               to="/"
-              className="block max-w-sm p-6 border rounded-lg shadow bg-gray-800 border-gray-700 hover:bg-gray-700"
+              className={`block max-w-sm p-6 border rounded-lg shadow ${
+                clickedLink === firstTower ? "bg-gray-700" : "bg-gray-800"
+              } border-gray-700 hover:bg-gray-700`}
             >
               <h5
-                className="mb-2 text-2xl font-bold tracking-tight text-white"
-                class={
+                className={`mb-2 text-2xl font-bold tracking-tight ${
                   firstTowerPrediction === "Blue Team"
                     ? "text-blue-500"
                     : "text-red-500"
-                }
+                }`}
               >
                 First Tower: {firstTowerPrediction}
               </h5>
@@ -122,15 +146,16 @@ const Predictions = () => {
             <Link
               onClick={handleSetChartTitle(firstBaron)}
               to="/"
-              className="block max-w-sm p-6 border rounded-lg shadow bg-gray-800 border-gray-700 hover:bg-gray-700"
+              className={`block max-w-sm p-6 border rounded-lg shadow ${
+                clickedLink === firstBaron ? "bg-gray-700" : "bg-gray-800"
+              } border-gray-700 hover:bg-gray-700`}
             >
               <h5
-                className="mb-2 text-2xl font-bold tracking-tight"
-                class={
+                className={`mb-2 text-2xl font-bold tracking-tight ${
                   firstBaronPrediction === "Blue Team"
                     ? "text-blue-500"
                     : "text-red-500"
-                }
+                }`}
               >
                 First Baron: {firstBaronPrediction}
               </h5>
@@ -138,7 +163,7 @@ const Predictions = () => {
           </div>
         </div>
       )}
-      <div class="flex flex-nowrap justify-center">
+      <div className="flex flex-nowrap justify-center">
         {importance.length > 0 && (
           <div>
             <FeatureImportance
@@ -146,7 +171,7 @@ const Predictions = () => {
               importance_data={importance}
             />
             <div className="flex justify-center mt-5">
-              <span class="text-sm text-gray-400">Min (1)</span>
+              <span className="text-sm text-gray-400">Min (1)</span>
               <input
                 id="labels-range-input"
                 type="range"
@@ -156,13 +181,13 @@ const Predictions = () => {
                 className="w-full h-2 rounded-lg appearance-none cursor-pointer bg-gray-700"
                 onChange={handleChange}
               />
-              <span class="text-sm text-gray-400">Max (20)</span>
+              <span className="text-sm text-gray-400">Max (20)</span>
             </div>
           </div>
         )}
         {importance.length > 0 && (
           <div>
-            <SolidGaugeChart></SolidGaugeChart>
+            <SolidGaugeChart />
           </div>
         )}
       </div>

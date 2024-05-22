@@ -123,7 +123,7 @@ def calculate_player_stats(player_name, champion):
     
     kills = player_data['kills'].mean()
     assists = player_data['assists'].mean()
-    deaths = player_data['deaths'].replace(0, 1).mean()
+    deaths = player_data['deaths'].mean()
     kda = round( (kills + assists) / deaths, 2)
 
     kills10 = player_data['killsat10'].mean()
@@ -214,45 +214,22 @@ def load_feature_importance(prediction_target):
         return json.load(f)
 
 def player_only_statistics(player_name):
-    """
-    Calculate player statistics including KDA at 10 and 15 minutes, gold difference at 10 and 15 minutes, and win rate.
-
-    Parameters:
-    player_name (str): Name of the player.
-    df (pd.DataFrame): DataFrame containing the game data.
-
-    Returns:
-    tuple: A tuple containing KDA at 10 minutes, KDA at 15 minutes, gold difference at 10 minutes,
-           gold difference at 15 minutes, and win rate.
-    """
-
     csv_file = "src/csv/players.csv"
 
     df = pd.read_csv(csv_file)
 
     player_data = df[(df['playername'] == player_name)]
     
-    
-    kills = player_data['kills']
-    assists = player_data['assists']
-    deaths = player_data['deaths'].replace(0, 1)
-    earned_gpm = player_data['earned gpm']
-    teamkills = player_data ['teamkills']
+    player_stats = []
 
+    for index, row in player_data.iterrows():
+        match_stats = {
+            'kills': row['kills'],
+            'assists': row['assists'],
+            'deaths': row['deaths'],
+            'earned_gpm': row['earned gpm'],
+            'teamkills': row['teamkills']
+        }
+        player_stats.append(match_stats)
 
-    new_df = pd.DataFrame({
-        'kills': kills,
-        'assists': assists,
-        'deaths': deaths,
-        'earned gpm': earned_gpm,
-        'teamkills' : teamkills
-    })
-
-    # Convert DataFrame to list of dictionaries
-    json_list = new_df.to_dict(orient='records')
-
-    # Convert list of dictionaries to JSON string
-    json_obj = json.dumps(json_list, indent=4)
-
-    # Print the JSON object
-    return json_obj
+    return player_stats
