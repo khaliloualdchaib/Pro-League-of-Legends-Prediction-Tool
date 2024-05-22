@@ -44,7 +44,7 @@ const Predictions = () => {
 
   useEffect(() => {
     const init = () => {
-      if (isClicked && responseData) {
+      if (isClicked && responseData && Object.keys(responseData.predictions).length > 0) {
         const predictions = responseData.predictions.classifications;
         setFirstBaronPrediction(
           predictions["firstbaron"] === 1 ? "Blue Team" : "Red Team"
@@ -64,7 +64,7 @@ const Predictions = () => {
       }
     };
     const updateImportanceData = () => {
-      if (responseData && isClicked) {
+      if (responseData && isClicked && Object.keys(responseData.predictions).length > 0) {
         let data;
         if (chartTitle === winTeam) {
           data = responseData.predictions.importance["result"];
@@ -87,7 +87,7 @@ const Predictions = () => {
   }, [isClicked, responseData, top, chartTitle]);
 
   const handleSetChartTitle = (title) => () => {
-    if (responseData && isClicked) {
+    if (responseData && isClicked && Object.keys(responseData.predictions).length > 0) {
       let data;
       if (title === winTeam) {
         data = responseData.predictions.importance["result"];
@@ -111,7 +111,7 @@ const Predictions = () => {
   return (
     <div className="flex flex-col">
       {importance.length > 0 && (
-        <div className="flex flex-nowrap justify-center gap-3">
+        <div className="flex flex-wrap justify-center gap-3">
           <div>
             <Link
               onClick={handleSetChartTitle(winTeam)}
@@ -171,7 +171,7 @@ const Predictions = () => {
           </div>
         </div>
       )}
-      <div className="flex flex-nowrap justify-center">
+      <div className="flex flex-wrap justify-center">
         {importance.length > 0 && (
           <div>
             <FeatureImportance
