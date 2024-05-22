@@ -171,9 +171,9 @@ const Predictions = () => {
           </div>
         </div>
       )}
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-row justify-center">
         {importance.length > 0 && (
-          <div>
+          <div className="basis-1/2">
             <FeatureImportance
               title={chartTitle}
               importance_data={importance}
@@ -194,7 +194,7 @@ const Predictions = () => {
           </div>
         )}
         {importance.length > 0 && (
-          <div>
+          <div className="bassis-1/2">
             <SolidGaugeChart accuracy={accuracy}/>
           </div>
         )}

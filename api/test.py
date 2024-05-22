@@ -18,4 +18,5 @@ from src.utils import get_column_values_from_csv, get_players, calculate_player_
 #print(get_predictions(team1Players=team1Players,team1Champs=team1Champs,team2Players=team2Players,team2Champs=team2Champs,prediction_target="firstbaron"))
 
 
-print(player_only_statistics("Faker"))
+print(player_only_statistics("Impact")[0])
+print(player_only_statistics("Sniper")[0])
