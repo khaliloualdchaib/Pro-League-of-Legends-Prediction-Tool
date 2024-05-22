@@ -88,7 +88,11 @@ class MainEndpoint(Resource):
         team2Champs = json.loads(request.args.get('team2Champs'))
 
         if self.check_empty_input(team1Players) or self.check_empty_input(team1Champs) or self.check_empty_input(team2Players) or self.check_empty_input(team2Champs):
-            return jsonify({})
+            return jsonify({
+            "predictions": {},
+            "playerStats": {},
+            "recentGames": {}
+            })
 
         responsejson = {
             "predictions": self.prediction_page(team1Players, team1Champs, team2Players, team2Champs),
