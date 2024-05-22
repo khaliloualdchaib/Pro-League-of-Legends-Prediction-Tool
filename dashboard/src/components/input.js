@@ -202,6 +202,7 @@ const Input = () => {
     handleADC2Select,
     handleSupport2Select,
   ];
+
   return (
     <form>
       <div class="flex flex-nowrap justify-center">
@@ -210,14 +211,19 @@ const Input = () => {
             <Autocomplete
               suggestions={teamlist}
               onSuggestionSelect={handleTeam1Select}
+              placeholder={"Choose Team Blue Side"}
             />
           </div>
           <div className="flex flex-nowrap">
-            {champSelect1.map((selecthandler) => (
-              <div key={selecthandler}>
+            {champSelect1.map((selecthandler, index) => (
+              <div key={index}>
+                <label class="block my-2 text-sm font-medium text-white">
+                  Select {roles[index]}:
+                </label>
                 <Autocomplete
                   suggestions={championList}
                   onSuggestionSelect={selecthandler}
+                  placeholder={"Champ"}
                 />
               </div>
             ))}
@@ -230,34 +236,35 @@ const Input = () => {
                     id="countries"
                     class=" border text-sm block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                   >
-                    {players1[role]?.map(
-                      (
-                        player // Add optional chaining here
-                      ) => (
-                        <option key={player} value={player}>
-                          {player}
-                        </option>
-                      )
-                    )}
+                    {players1[role]?.map((player) => (
+                      <option key={player} value={player}>
+                        {player}
+                      </option>
+                    ))}
                   </select>
                 </div>
               ))}
             </div>
           )}
         </div>
-        <div class="flex flex-col">
+        <div class="flex flex-col ml-3">
           <div>
             <Autocomplete
               suggestions={teamlist}
               onSuggestionSelect={handleTeam2Select}
+              placeholder={"Choose Team Red Side"}
             />
           </div>
           <div className="flex flex-nowrap">
-            {champSelect2.map((selecthandler) => (
-              <div key={selecthandler}>
+            {champSelect2.map((selecthandler, index) => (
+              <div key={index}>
+                <label class="block my-2 text-sm font-medium text-white">
+                  Select {roles[index]}:
+                </label>
                 <Autocomplete
                   suggestions={championList}
                   onSuggestionSelect={selecthandler}
+                  placeholder={"Champ"}
                 />
               </div>
             ))}
