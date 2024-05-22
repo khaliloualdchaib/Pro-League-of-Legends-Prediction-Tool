@@ -29,7 +29,6 @@ const prepareChartData = (size, role, data, team) => {
     result.teamKills.push(statList[i].teamkills);
     result.goldEarned.push(statList[i].earned_gpm);
   }
-  console.log(result);
   return result;
 };
 

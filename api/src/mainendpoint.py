@@ -97,7 +97,7 @@ class MainEndpoint(Resource):
         responsejson = {
             "predictions": self.prediction_page(team1Players, team1Champs, team2Players, team2Champs),
             "playerStats": self.getplayerStats(team1Players, team1Champs, team2Players, team2Champs),
-            "recentGames": self.recentPage(team1Players, team1Players)
+            "recentGames": self.recentPage(team1Players, team2Players)
         } 
 
         return jsonify(responsejson)

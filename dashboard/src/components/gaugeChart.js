@@ -13,11 +13,11 @@ const SolidGaugeChart = ({accuracy}) => {
       type: "solidgauge",
     },
     title: {
-      text: "Accuracy",
+      text: "",
     },
     pane: {
       center: ["50%", "85%"], // Centered vertically
-      size: "140%", // Adjust size to better fit the container
+      size: "100%", // Adjust size to better fit the container
       startAngle: -90,
       endAngle: 90,
       background: {
@@ -52,7 +52,7 @@ const SolidGaugeChart = ({accuracy}) => {
         data: [accuracy],
         dataLabels: {
           format:
-            '<div style="text-align:center;color: white;"><span style="font-size:30px">{y}%</span><br/></div>',
+            '<div style="text-align:center;color: white;"><span style="font-size:30px">{y}%</span><br/>Accuracy</div>',
           borderWidth: 0,
           borderColor: "black",
         },
