@@ -76,7 +76,7 @@ class MainEndpoint(Resource):
             matches["Team2"][role] = player_only_statistics(team2Players[role])
         return matches
                 
-    def check_empty_input(inp):
+    def check_empty_input(self, inp):
         if inp["Top"] == "" or inp["Jungle"] == "" or inp["Mid"] == "" or inp["Bottom"] == "" or inp["Support"] == "":
             return True
         return False
