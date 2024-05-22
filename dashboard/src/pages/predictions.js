@@ -9,6 +9,10 @@ const Predictions = () => {
   const winTeam = "Winning Team Feature Importance";
   const firstTower = "First Tower Feature Importance";
   const firstBaron = "First Baron Feature Importance";
+  const winAccuracy = 98;
+  const firstTowerAccuracy = 68;
+  const firstBaronAccuracy = 80;
+  const [accuracy, setAccuracy] = useState(winAccuracy);
 
   const [chartTitle, setChartTitle] = useState(winTeam);
   const { responseData } = useContext(ResponseContext);
@@ -24,8 +28,6 @@ const Predictions = () => {
   const handleChange = (event) => {
     const newTop = parseInt(event.target.value, 10);
     setTop(newTop);
-
-    // Update importance data based on the selected chart title
     let data;
     if (chartTitle === winTeam) {
       data = responseData.predictions.importance["result"];
@@ -66,10 +68,13 @@ const Predictions = () => {
         let data;
         if (chartTitle === winTeam) {
           data = responseData.predictions.importance["result"];
+          setAccuracy(winAccuracy);
         } else if (chartTitle === firstTower) {
           data = responseData.predictions.importance["firsttower"];
+          setAccuracy(firstTowerAccuracy);
         } else if (chartTitle === firstBaron) {
           data = responseData.predictions.importance["firstbaron"];
+          setAccuracy(firstBaronAccuracy);
         }
         data.sort((a, b) => b.Importance - a.Importance);
 
@@ -78,7 +83,7 @@ const Predictions = () => {
       }
     };
     init();
-    updateImportanceData()
+    updateImportanceData();
   }, [isClicked, responseData, top, chartTitle]);
 
   const handleSetChartTitle = (title) => () => {
@@ -86,17 +91,20 @@ const Predictions = () => {
       let data;
       if (title === winTeam) {
         data = responseData.predictions.importance["result"];
+        setAccuracy(winAccuracy);
       } else if (title === firstTower) {
         data = responseData.predictions.importance["firsttower"];
+        setAccuracy(firstTowerAccuracy);
       } else if (title === firstBaron) {
         data = responseData.predictions.importance["firstbaron"];
+        setAccuracy(firstBaronAccuracy);
       }
       data.sort((a, b) => b.Importance - a.Importance);
 
       const topFeatures = data.slice(0, top);
       setImportance(topFeatures);
       setChartTitle(title);
-      setClickedLink(title); // Set the clicked link state
+      setClickedLink(title);
     }
   };
 
@@ -187,7 +195,7 @@ const Predictions = () => {
         )}
         {importance.length > 0 && (
           <div>
-            <SolidGaugeChart />
+            <SolidGaugeChart accuracy={accuracy}/>
           </div>
         )}
       </div>

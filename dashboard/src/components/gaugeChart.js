@@ -7,7 +7,7 @@ import SolidGauge from "highcharts/modules/solid-gauge";
 HighchartsMore(Highcharts);
 SolidGauge(Highcharts); // Initialize the solid gauge module
 
-const SolidGaugeChart = () => {
+const SolidGaugeChart = ({accuracy}) => {
   const options = {
     chart: {
       type: "solidgauge",
@@ -49,7 +49,7 @@ const SolidGaugeChart = () => {
     series: [
       {
         name: "Speed",
-        data: [80],
+        data: [accuracy],
         dataLabels: {
           format:
             '<div style="text-align:center;color: white;"><span style="font-size:30px">{y}%</span><br/></div>',

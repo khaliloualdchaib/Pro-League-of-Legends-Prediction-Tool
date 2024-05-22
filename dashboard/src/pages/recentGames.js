@@ -231,7 +231,7 @@ const RecentGames = () => {
               <div className="basis-1/2 w-full">
                 <LineChart
                   nGames={sliderValue}
-                  team={"Blue Side Team"}
+                  team={selectedRadio + " Blue Side Team"}
                   titlecolor={"blue"}
                   data={prepareChartData(
                     sliderValue,
@@ -246,7 +246,7 @@ const RecentGames = () => {
               <div className="basis-1/2 w-full">
                 <LineChart
                   nGames={sliderValue}
-                  team={"Red Side Team"}
+                  team={selectedRadio +" Red Side Team"}
                   titlecolor={"red"}
                   data={prepareChartData(
                     sliderValue,
