@@ -44,7 +44,11 @@ const Predictions = () => {
 
   useEffect(() => {
     const init = () => {
-      if (isClicked && responseData && Object.keys(responseData.predictions).length > 0) {
+      if (
+        isClicked &&
+        responseData &&
+        Object.keys(responseData.predictions).length > 0
+      ) {
         const predictions = responseData.predictions.classifications;
         setFirstBaronPrediction(
           predictions["firstbaron"] === 1 ? "Blue Team" : "Red Team"
@@ -64,7 +68,11 @@ const Predictions = () => {
       }
     };
     const updateImportanceData = () => {
-      if (responseData && isClicked && Object.keys(responseData.predictions).length > 0) {
+      if (
+        responseData &&
+        isClicked &&
+        Object.keys(responseData.predictions).length > 0
+      ) {
         let data;
         if (chartTitle === winTeam) {
           data = responseData.predictions.importance["result"];
@@ -87,7 +95,11 @@ const Predictions = () => {
   }, [isClicked, responseData, top, chartTitle]);
 
   const handleSetChartTitle = (title) => () => {
-    if (responseData && isClicked && Object.keys(responseData.predictions).length > 0) {
+    if (
+      responseData &&
+      isClicked &&
+      Object.keys(responseData.predictions).length > 0
+    ) {
       let data;
       if (title === winTeam) {
         data = responseData.predictions.importance["result"];
@@ -110,67 +122,69 @@ const Predictions = () => {
 
   return (
     <div className="flex flex-col">
-      <p className="text-sm">The prections are done by an AI model.</p>
       {importance.length > 0 && (
-        <div className="flex flex-wrap justify-center gap-3">
-          <div>
-            <Link
-              onClick={handleSetChartTitle(winTeam)}
-              to="/"
-              className={`block max-w-sm p-6 border rounded-lg shadow ${
-                clickedLink === winTeam ? "bg-gray-700" : "bg-gray-800"
-              } border-gray-700 hover:bg-gray-700`}
-            >
-              <h5
-                className={`mb-2 text-2xl font-bold tracking-tight ${
-                  winPrediction === "Blue Team"
-                    ? "text-blue-500"
-                    : "text-red-500"
-                }`}
+        <>
+          <p className="text-sm">The predictions are done by an AI model.</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <div>
+              <Link
+                onClick={handleSetChartTitle(winTeam)}
+                to="/"
+                className={`block max-w-sm p-6 border rounded-lg shadow ${
+                  clickedLink === winTeam ? "bg-gray-700" : "bg-gray-800"
+                } border-gray-700 hover:bg-gray-700`}
               >
-                Winning Team: {winPrediction}
-              </h5>
-            </Link>
-          </div>
-          <div>
-            <Link
-              onClick={handleSetChartTitle(firstTower)}
-              to="/"
-              className={`block max-w-sm p-6 border rounded-lg shadow ${
-                clickedLink === firstTower ? "bg-gray-700" : "bg-gray-800"
-              } border-gray-700 hover:bg-gray-700`}
-            >
-              <h5
-                className={`mb-2 text-2xl font-bold tracking-tight ${
-                  firstTowerPrediction === "Blue Team"
-                    ? "text-blue-500"
-                    : "text-red-500"
-                }`}
+                <h5
+                  className={`mb-2 text-2xl font-bold tracking-tight ${
+                    winPrediction === "Blue Team"
+                      ? "text-blue-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  Winning Team: {winPrediction}
+                </h5>
+              </Link>
+            </div>
+            <div>
+              <Link
+                onClick={handleSetChartTitle(firstTower)}
+                to="/"
+                className={`block max-w-sm p-6 border rounded-lg shadow ${
+                  clickedLink === firstTower ? "bg-gray-700" : "bg-gray-800"
+                } border-gray-700 hover:bg-gray-700`}
               >
-                First Tower: {firstTowerPrediction}
-              </h5>
-            </Link>
-          </div>
-          <div>
-            <Link
-              onClick={handleSetChartTitle(firstBaron)}
-              to="/"
-              className={`block max-w-sm p-6 border rounded-lg shadow ${
-                clickedLink === firstBaron ? "bg-gray-700" : "bg-gray-800"
-              } border-gray-700 hover:bg-gray-700`}
-            >
-              <h5
-                className={`mb-2 text-2xl font-bold tracking-tight ${
-                  firstBaronPrediction === "Blue Team"
-                    ? "text-blue-500"
-                    : "text-red-500"
-                }`}
+                <h5
+                  className={`mb-2 text-2xl font-bold tracking-tight ${
+                    firstTowerPrediction === "Blue Team"
+                      ? "text-blue-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  First Tower: {firstTowerPrediction}
+                </h5>
+              </Link>
+            </div>
+            <div>
+              <Link
+                onClick={handleSetChartTitle(firstBaron)}
+                to="/"
+                className={`block max-w-sm p-6 border rounded-lg shadow ${
+                  clickedLink === firstBaron ? "bg-gray-700" : "bg-gray-800"
+                } border-gray-700 hover:bg-gray-700`}
               >
-                First Baron: {firstBaronPrediction}
-              </h5>
-            </Link>
+                <h5
+                  className={`mb-2 text-2xl font-bold tracking-tight ${
+                    firstBaronPrediction === "Blue Team"
+                      ? "text-blue-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  First Baron: {firstBaronPrediction}
+                </h5>
+              </Link>
+            </div>
           </div>
-        </div>
+        </>
       )}
       <div className="flex flex-row justify-center">
         {importance.length > 0 && (
@@ -196,7 +210,7 @@ const Predictions = () => {
         )}
         {importance.length > 0 && (
           <div className="bassis-1/2">
-            <SolidGaugeChart accuracy={accuracy}/>
+            <SolidGaugeChart accuracy={accuracy} />
           </div>
         )}
       </div>
