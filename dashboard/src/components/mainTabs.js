@@ -19,7 +19,7 @@ const MainTabs = () => {
             to="/RecentGames"
             class={location.pathname === "/RecentGames" ? activeTab : normalTab}
           >
-            Recent Games
+            Players KDA
           </Link>
         </li>
         <li class="me-2">
@@ -27,7 +27,7 @@ const MainTabs = () => {
             to="/PlayerStats"
             class={location.pathname === "/PlayerStats" ? activeTab : normalTab}
           >
-            Player Stats
+            Player Statistics
           </Link>
         </li>
       </ul>

@@ -108,6 +108,7 @@ const PlayerStats = () => {
   }, [isClicked, responseData]);
   return (
     <>
+      <h1>Player statistics with the chosen champion</h1>
       {Object.keys(team1SpiderData).length > 0 && (
         <div class="flex flex-row">
           <div className="basis-1/2">
@@ -118,7 +119,6 @@ const PlayerStats = () => {
                 player2Data={team2SpiderData[selectedRole].normal}
                 normalizedPlayer1Data={team1SpiderData[selectedRole].normalized}
                 normalizedPlayer2Data={team2SpiderData[selectedRole].normalized}
-                currentRole={selectedRole}
               />
             </div>
           </div>

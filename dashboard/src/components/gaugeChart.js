@@ -52,7 +52,7 @@ const SolidGaugeChart = ({accuracy}) => {
         data: [accuracy],
         dataLabels: {
           format:
-            '<div style="text-align:center;color: white;"><span style="font-size:30px">{y}%</span><br/>Accuracy</div>',
+            '<div style="text-align:center;color: white;"><span style="font-size:30px">{y}%</span><br/>Model<br/>Accuracy</div>',
           borderWidth: 0,
           borderColor: "black",
         },

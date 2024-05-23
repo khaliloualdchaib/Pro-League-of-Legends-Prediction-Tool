@@ -7,7 +7,6 @@ const SpiderChart = ({
   player2Data,
   normalizedPlayer1Data,
   normalizedPlayer2Data,
-  currentRole
 }) => {
   const options = {
     chart: {
@@ -21,7 +20,14 @@ const SpiderChart = ({
       size: "80%",
     },
     xAxis: {
-      categories: ["Average Kills", "Average Assists", "Average Deaths", "Games Played", "Win Rate", "Average Gold/Min"],
+      categories: [
+        "Average Kills",
+        "Average Assists",
+        "Average Deaths",
+        "Games Played",
+        "Win Rate",
+        "Average Gold/Min",
+      ],
       tickmarkPlacement: "on",
       lineWidth: 0,
     },
@@ -42,9 +48,9 @@ const SpiderChart = ({
     tooltip: {
       formatter: function () {
         let actualData;
-        if (this.series.name === "Top Laner Blue Side") {
+        if (this.series.name === "Blue Side") {
           actualData = player1Data[this.point.index];
-        } else if (this.series.name === "Top Laner Red Side") {
+        } else if (this.series.name === "Red Side") {
           actualData = player2Data[this.point.index];
         }
         return `<b>${this.series.name}</b><br/>${this.x}: ${actualData}`;
@@ -52,13 +58,13 @@ const SpiderChart = ({
     },
     series: [
       {
-        name: currentRole + " Blue Side",
+        name: "Blue Side",
         data: normalizedPlayer1Data,
         pointPlacement: "on",
-        color: "blue",
+        color: "#3366ff",
       },
       {
-        name:  currentRole + " Red Side",
+        name: "Red Side",
         data: normalizedPlayer2Data,
         pointPlacement: "on",
         color: "red",

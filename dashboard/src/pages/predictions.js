@@ -110,6 +110,7 @@ const Predictions = () => {
 
   return (
     <div className="flex flex-col">
+      <p className="text-sm">The prections are done by an AI model.</p>
       {importance.length > 0 && (
         <div className="flex flex-wrap justify-center gap-3">
           <div>

@@ -22,7 +22,7 @@ const LineChart = ({ team, nGames, titlecolor, data }) => {
     },
     yAxis: {
       title: {
-        text: "Statistics",
+        text: "KDA",
       },
     },
     legend: {
@@ -32,20 +32,24 @@ const LineChart = ({ team, nGames, titlecolor, data }) => {
     },
     series: [
       {
-        name: "Kills",
-        data: data.kills,
+        name: "Top",
+        data: data.Top,
       },
       {
-        name: "Assists",
-        data: data.assists,
+        name: "Jungle",
+        data: data.Jungle,
       },
       {
-        name: "Deaths",
-        data: data.deaths,
+        name: "Mid",
+        data: data.Mid,
       },
       {
-        name: "Team Kills",
-        data: data.teamKills, 
+        name: "Bottom",
+        data: data.Bottom, 
+      },
+      {
+        name: "Support",
+        data: data.Support, 
       },
     ],
   };

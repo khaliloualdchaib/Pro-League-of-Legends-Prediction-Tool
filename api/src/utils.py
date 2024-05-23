@@ -190,13 +190,10 @@ def player_only_statistics(player_name):
     player_stats = []
 
     for index, row in player_data.iterrows():
-        match_stats = {
-            'kills': row['kills'],
-            'assists': row['assists'],
-            'deaths': row['deaths'],
-            'earned_gpm': row['earned gpm'],
-            'teamkills': row['teamkills']
-        }
-        player_stats.append(match_stats)
+        tmp = row['deaths']
+        if tmp == 0:
+            tmp = 1
+        kda = (row['kills'] + row['assists'])/tmp
+        player_stats.append(kda)
 
     return player_stats
