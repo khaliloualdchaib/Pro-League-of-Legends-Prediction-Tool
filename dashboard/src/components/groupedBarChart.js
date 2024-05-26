@@ -24,12 +24,12 @@ const GroupedBarChart = ({ team1Data, team2Data, metric }) => {
     series: [
       {
         name: "Blue Team",
-        data: team1Data,
+        data: [team1Data.Top, team1Data.Jungle, team1Data.Mid, team1Data.Bottom, team1Data.Support],
         color: "#3366ff",
       },
       {
         name: "Red Team",
-        data: team2Data,
+        data: [team2Data.Top, team2Data.Jungle, team2Data.Mid, team2Data.Bottom, team2Data.Support],
         color: "red",
       },
     ],

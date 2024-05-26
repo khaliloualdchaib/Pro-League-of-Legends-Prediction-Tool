@@ -58,21 +58,21 @@ const prepareData = (maxdata, team) => {
   }
   return data;
 };
-
 const getBarData = (data) => {
   const result = {
-    Kills: [],
-    Assists: [],
-    Deaths: [],
-    PlayedGames: [],
-    Winrate: [],
-    GPM: [],
+    Kills: {},
+    Assists: {},
+    Deaths: {},
+    PlayedGames: {},
+    Winrate: {},
+    GPM: {},
   };
   for (let role in data) {
     for (let metric in result) {
-      result[metric].push(data[role][metric]);
+      result[metric][role] = data[role][metric]
     }
   }
+  console.log(result)
   return result;
 };
 
