@@ -3,7 +3,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 const LineChart = ({ team, nGames, titlecolor, data }) => {
-  const categories = Array.from({ length: nGames }, (_, i) => i + 1);
+  const categories = Array.from({ length: nGames }, (_, i) => nGames - i);
   const options = {
     chart: {
       type: "line",
@@ -11,8 +11,8 @@ const LineChart = ({ team, nGames, titlecolor, data }) => {
     title: {
       text: "Last " + nGames + " Game(s) of " + team,
       style: {
-        color: titlecolor
-      }
+        color: titlecolor,
+      },
     },
     xAxis: {
       categories: categories,
@@ -45,11 +45,11 @@ const LineChart = ({ team, nGames, titlecolor, data }) => {
       },
       {
         name: "Bottom",
-        data: data.Bottom, 
+        data: data.Bottom,
       },
       {
         name: "Support",
-        data: data.Support, 
+        data: data.Support,
       },
     ],
   };

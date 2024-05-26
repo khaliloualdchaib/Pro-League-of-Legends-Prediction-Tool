@@ -105,7 +105,7 @@ const PlayerStats = () => {
       }
     };
     init();
-  }, [isClicked, responseData]);
+  }, [isClicked, responseData, selectedRole, selectedStat]);
   return (
     <>
       <h1>Player statistics with the chosen champion</h1>
