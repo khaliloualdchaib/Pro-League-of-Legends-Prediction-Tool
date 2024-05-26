@@ -91,7 +91,13 @@ def calculate_player_stats(player_name, champion):
     kills = player_data['kills'].mean()
     assists = player_data['assists'].mean()
     deaths = player_data['deaths'].mean()
-    kda = round( (kills + assists) / deaths, 2)
+    #print("player: ", player_name, "champion: ", champion)
+    #print("kills: ", kills,"assists: ", assists, "deaths: ", deaths)
+    if deaths == 0:
+        tmpdeaths = 1
+    else:
+        tmpdeaths = deaths
+    kda = round( (kills + assists) / tmpdeaths, 2)
 
     kills10 = player_data['killsat10'].mean()
     assists10 = player_data['assistsat10'].mean()
@@ -149,6 +155,7 @@ def get_predictions(team1Players,team1Champs, team2Players, team2Champs, predict
         champs.append(team2Champs[i])
     
     for i in range(len(players)):
+        #print(i)
         kda, kda15, kda10, golddiffat10, golddiffat15, wr, gp, _, _, _ , _ = calculate_player_stats(players[i], champs[i])
         input_data[f"{newsides[i]}{newroles[i]}gp"] = gp
         input_data[f"{newsides[i]}{newroles[i]}wr"] = wr
