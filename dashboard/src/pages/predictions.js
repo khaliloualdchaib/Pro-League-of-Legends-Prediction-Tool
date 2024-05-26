@@ -189,6 +189,14 @@ const Predictions = () => {
       <div className="flex flex-row justify-center">
         {importance.length > 0 && (
           <div className="basis-1/2">
+            <div
+              class="p-4 mb-4 text-sm rounded-lg bg-gray-800 text-blue-400 mt-2"
+              role="alert"
+            >
+              The Feature Importance information is useful when examining the
+              Player Statistics Page. It highlights which statistics were
+              crucial for the AI model in making its predictions.
+            </div>
             <FeatureImportance
               title={chartTitle}
               importance_data={importance}

@@ -208,6 +208,9 @@ const Input = () => {
       <div class="flex flex-nowrap justify-center">
         <div class="flex flex-col">
           <div>
+            <label class="block my-2 text-sm font-medium text-white">
+              Select Team for Blue Side:
+            </label>
             <Autocomplete
               suggestions={teamlist}
               onSuggestionSelect={handleTeam1Select}
@@ -249,6 +252,9 @@ const Input = () => {
         </div>
         <div class="flex flex-col ml-3">
           <div>
+            <label class="block my-2 text-sm font-medium text-white">
+              Select Team for Red Side:
+            </label>
             <Autocomplete
               suggestions={teamlist}
               onSuggestionSelect={handleTeam2Select}
